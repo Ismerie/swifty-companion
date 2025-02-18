@@ -17,68 +17,16 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { getAccessToken } from './Utils/getAccessToken';
+import getAccessToken from './Utils/getAccessToken';
 import { apiClient } from './Utils/constant';
 
 import ListSearch from './Home/ListSearch'
+import SearchBar from './Home/SearchBar'
 
 export default function HomeScreen() {
-    const [inputText, setInputText] = useState('');
-    const [inputIsFocused, setInputIsFocused] = useState(false);
     // Animated values
     const logoOpacity = useRef(new Animated.Value(1)).current;
     const inputPosition = useRef(new Animated.Value(0)).current;
-
-    useEffect(() => {
-        const accessToken = getAccessToken();
-        if (accessToken) {
-            apiClient.interceptors.request.use(
-                (config) => {
-                    config.headers.Authorization - `Bearer ${token}`;
-                }
-            )
-        }
-    }, [])
-
-    function handleFocus() {
-        setInputIsFocused(true);
-        Animated.parallel([
-            Animated.timing(logoOpacity, {
-                toValue: 0,
-                duration: 300,
-                useNativeDriver: true,
-            }),
-            Animated.timing(inputPosition, {
-                toValue: -200,
-                duration: 300,
-                useNativeDriver: true,
-            }),
-        ]).start();
-    }
-
-    function handleBlur() {
-        setInputIsFocused(false);
-        Animated.parallel([
-            Animated.timing(logoOpacity, {
-                toValue: 1,
-                duration: 300,
-                useNativeDriver: true,
-            }),
-            Animated.timing(inputPosition, {
-                toValue: 0,
-                duration: 300,
-                useNativeDriver: true,
-            }),
-        ]).start();
-    }
-
-	function handleSearch(text) {
-        setInputText(text);
-        const filtered = students.filter(student =>
-            student.name.toLowerCase().includes(text.toLowerCase())
-        );
-        setFilteredStudents(filtered);
-    }
 
     return (
         <KeyboardAvoidingView
@@ -102,21 +50,7 @@ export default function HomeScreen() {
 
                         {/* TextInput with animated position */}
                         <Animated.View style={[styles.containerTitle, { transform: [{ translateY: inputPosition }] }]}>
-                            <View style={styles.containerSearch}>
-								<View style={styles.inputContainer}>
-									<Icon name="search-outline" size={24} color="#D6D6D6" />
-									<TextInput
-										style={styles.input}
-										value={inputText}
-										onChangeText={handleSearch}
-										onSubmitEditing={Keyboard.dismiss}
-										placeholder="Search student..."
-										onFocus={handleFocus}
-										onBlur={handleBlur}
-									/>
-								</View>
-                                <ListSearch />
-                            </View>
+                            <SearchBar logoOpacity={logoOpacity} inputPosition={inputPosition} />
                         </Animated.View>
                         <StatusBar style="auto" />
                     </ImageBackground>
@@ -140,25 +74,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    containerSearch: {
-		flex: 1,
-        justifyContent: 'start',
-        alignItems: 'center',
-    },
-    input: {
-        flex: 1, // Prend tout l'espace restant
-        paddingVertical: 10,
-        fontSize: 16,
-        color: 'black',
-    },
-	inputContainer: {
-        flexDirection: 'row', // Place l'icône et le champ côte à côte
-        alignItems: 'center',
-        borderRadius: 10,
-        backgroundColor: 'white',
-		paddingHorizontal: 10,
-        width: 300,
     },
     backgroundImage: {
         flex: 1,

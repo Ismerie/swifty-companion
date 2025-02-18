@@ -2,19 +2,17 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 
-import students from '../../students.json';
-
 export default function ListSearch() {
     const [inputText, setInputText] = useState('');
-    const [filteredStudents, setFilteredStudents] = useState(students);
+    // const [filteredStudents, setFilteredStudents] = useState(students);
 
-    function handleSearch(text) {
-        setInputText(text);
-        const filtered = students.filter(student =>
-            student.name.toLowerCase().includes(text.toLowerCase())
-        );
-        setFilteredStudents(filtered);
-    }
+    // function handleSearch(text) {
+    //     setInputText(text);
+    //     const filtered = students.filter(student =>
+    //         student.name.toLowerCase().includes(text.toLowerCase())
+    //     );
+    //     setFilteredStudents(filtered);
+    // }
 
     function handleSearchSubmit() {
         // Gérer la soumission de la recherche
@@ -22,7 +20,7 @@ export default function ListSearch() {
     
     return (
         <View style={styles.container}>
-            <FlatList
+            {/* <FlatList
                 data={filteredStudents}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
@@ -33,7 +31,7 @@ export default function ListSearch() {
                         </View>
                     </TouchableOpacity>
                 )}
-            />
+            /> */}
         </View>
     );
 }
