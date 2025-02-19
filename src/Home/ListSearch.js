@@ -2,36 +2,22 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 
-export default function ListSearch() {
-    const [inputText, setInputText] = useState('');
-    // const [filteredStudents, setFilteredStudents] = useState(students);
+export default function ListSearch({listStudents}) {
 
-    // function handleSearch(text) {
-    //     setInputText(text);
-    //     const filtered = students.filter(student =>
-    //         student.name.toLowerCase().includes(text.toLowerCase())
-    //     );
-    //     setFilteredStudents(filtered);
-    // }
-
-    function handleSearchSubmit() {
-        // Gérer la soumission de la recherche
-    }
-    
     return (
         <View style={styles.container}>
-            {/* <FlatList
-                data={filteredStudents}
+            <FlatList
+                data={listStudents}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
                     <TouchableOpacity style={styles.card}>
-                        <Image source={{ uri: item.photo }} style={styles.photo} />
-                        <View>
-                            <Text style={styles.name}>{item.name}</Text>
-                        </View>
+                        <Image source={{ uri: item.image}} style={styles.image} />
+                        <Text style={styles.login}>{item.login}</Text> 
+                        <Text style={styles.firstName}>{item.firstName}</Text> 
+                        <Text style={styles.lastName}>{item.lastName}</Text> 
                     </TouchableOpacity>
                 )}
-            /> */}
+            />
         </View>
     );
 }
@@ -43,5 +29,17 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         width: 300,
         borderRadius: 10,
+        padding: 10,
+    },
+    card: {
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    image: {
+        width: 70,
+        height: 70,
+        borderRadius: 50,
     },
 });

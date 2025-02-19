@@ -10,6 +10,8 @@ export default function SearchBar({logoOpacity, inputPosition}) {
     const [inputIsFocused, setInputIsFocused] = useState(false);
     const [suggestionsStudents, setSuggestionsStudents] = useState([]);
     
+    console.log(suggestionsStudents)
+
     function handleSearch(text) {
         Keyboard.dismiss;
     }
@@ -59,10 +61,17 @@ export default function SearchBar({logoOpacity, inputPosition}) {
                 }
             });
             if (res.data) {
-                console.log(res.data)
-                res.data.forEach(user => {
-                    console.log(user.login);
-                });
+                const suggestions = res.data.map(user => ({
+                    id: user.id,
+                    login: user.login,
+                    firstName: user.first_name,
+                    lastName: user.last_name,
+                    image: user.image.versions.small
+                }))
+                setSuggestionsStudents(suggestions);
+                // res.data.forEach(user => {
+                //     console.log(user.login);
+                // });
             }
         }
         catch (error) {
@@ -95,7 +104,9 @@ export default function SearchBar({logoOpacity, inputPosition}) {
                     onBlur={handleBlur}
                 />
             </View>
-            <ListSearch />
+            {suggestionsStudents.length > 0 && (
+                <ListSearch listStudents={suggestionsStudents}/>
+            )}
         </View>
     );
 }
@@ -108,7 +119,7 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
     },
     containerSearch: {
-  flex: 1,
+        flex: 1,
         justifyContent: 'start',
         alignItems: 'center',
     },
@@ -117,7 +128,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         backgroundColor: 'white',
-  paddingHorizontal: 10,
+        paddingHorizontal: 10,
         width: 300,
     },
     input: {
