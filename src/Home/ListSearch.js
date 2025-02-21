@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 
-export default function ListSearch({listStudents}) {
+export default function ListSearch({listStudents, lengthSearch}) {
 
+    console.log(listStudents)
     return (
         <View style={styles.container}>
             <FlatList
@@ -11,10 +12,13 @@ export default function ListSearch({listStudents}) {
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
                     <TouchableOpacity style={styles.card}>
+                    {item.image != null ? (
                         <Image source={{ uri: item.image}} style={styles.image} />
-                        <Text style={styles.login}>{item.login}</Text> 
-                        <Text style={styles.firstName}>{item.firstName}</Text> 
-                        <Text style={styles.lastName}>{item.lastName}</Text> 
+                    ):(
+                        <Image source={require('./../../assets/default_profile_picture.jpg')} style={styles.image} />
+                    )}
+                        <Text style={styles.loginBold}>{item.login.substring(0, lengthSearch)}</Text> 
+                        <Text style={styles.login}>{item.login.substring(lengthSearch)}</Text> 
                     </TouchableOpacity>
                 )}
             />
@@ -24,11 +28,11 @@ export default function ListSearch({listStudents}) {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: "white",
         width: 300,
         borderRadius: 10,
+        borderTopLeftRadius: 0,
+        borderTopRightRadius: 0,
         padding: 10,
     },
     card: {
@@ -36,10 +40,15 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
+        padding: 10,
     },
     image: {
         width: 70,
         height: 70,
         borderRadius: 50,
     },
+    loginBold: {
+        fontWeight: 'bold',
+        marginLeft: 10,
+    }
 });

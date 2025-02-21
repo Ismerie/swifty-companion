@@ -13,7 +13,7 @@ export default function SearchBar({logoOpacity, inputPosition}) {
     console.log(suggestionsStudents)
 
     function handleSearch(text) {
-        Keyboard.dismiss;
+        Keyboard.dismiss();
     }
 
     function handleFocus() {
@@ -37,7 +37,7 @@ export default function SearchBar({logoOpacity, inputPosition}) {
         Animated.parallel([
             Animated.timing(logoOpacity, {
                 toValue: 1,
-                duration: 300,
+                duration: 200,
                 useNativeDriver: true,
             }),
             Animated.timing(inputPosition, {
@@ -66,12 +66,9 @@ export default function SearchBar({logoOpacity, inputPosition}) {
                     login: user.login,
                     firstName: user.first_name,
                     lastName: user.last_name,
-                    image: user.image.versions.small
+                    image: user.image?.versions?.small || null
                 }))
                 setSuggestionsStudents(suggestions);
-                // res.data.forEach(user => {
-                //     console.log(user.login);
-                // });
             }
         }
         catch (error) {
@@ -80,19 +77,20 @@ export default function SearchBar({logoOpacity, inputPosition}) {
     }
 
     useEffect(() => {
-        const fetchSuggestions = async () => {
-            console.log(inputText)
-            if (inputText)
-                await getSuggestionsStudents(inputText);
-            else
+        const delaySearch = setTimeout(() => {
+            if (inputText.length >= 3) {
+                getSuggestionsStudents(inputText);
+            } else {
                 setSuggestionsStudents([]);
-        };
-        fetchSuggestions();
-    }, [inputText])
+            }
+        }, 100); // Attente de 500ms avant d'envoyer la requête
+        
+        return () => clearTimeout(delaySearch); // Annule la requête précédente si l'utilisateur tape encore
+    }, [inputText]);
     
     return (
         <View style={styles.containerSearch}>
-            <View style={styles.inputContainer}>
+            <View style={[styles.inputContainer, suggestionsStudents.length > 0 && inputIsFocused ? styles.inputWidthList : null]}>
                 <Icon name="search-outline" size={24} color="#D6D6D6" />
                 <TextInput
                     style={styles.input}
@@ -104,8 +102,8 @@ export default function SearchBar({logoOpacity, inputPosition}) {
                     onBlur={handleBlur}
                 />
             </View>
-            {suggestionsStudents.length > 0 && (
-                <ListSearch listStudents={suggestionsStudents}/>
+            {suggestionsStudents.length > 0 && inputIsFocused && (
+                <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length}/>
             )}
         </View>
     );
@@ -124,17 +122,23 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     inputContainer: {
-        flexDirection: 'row', // Place l'icône et le champ côte à côte
+        flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 10,
         backgroundColor: 'white',
         paddingHorizontal: 10,
         width: 300,
+        borderWidth: 3,
+        borderColor: 'white',
     },
     input: {
-        flex: 1, // Prend tout l'espace restant
+        flex: 1,
         paddingVertical: 10,
         fontSize: 16,
         color: 'black',
     },
+    inputWidthList: {
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+    }
 });

@@ -15,12 +15,7 @@ import {
 	TouchableOpacity,
 	Text
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 
-import getAccessToken from './Utils/getAccessToken';
-import { apiClient } from './Utils/constant';
-
-import ListSearch from './Home/ListSearch'
 import SearchBar from './Home/SearchBar'
 
 export default function HomeScreen() {
