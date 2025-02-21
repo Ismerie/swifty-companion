@@ -8,6 +8,7 @@ export default function ListSearch({listStudents, lengthSearch}) {
     return (
         <View style={styles.container}>
             <FlatList
+                style={styles.containerList}
                 data={listStudents}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
@@ -33,7 +34,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
-        padding: 10,
+        paddingBottom: 10,
+    },
+    containerList: {
+
     },
     card: {
         flex: 1,
