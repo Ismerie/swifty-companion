@@ -44,7 +44,7 @@ export default function HomeScreen() {
                         </Animated.View>
 
                         {/* TextInput with animated position */}
-                        <Animated.View style={[styles.containerTitle, { transform: [{ translateY: inputPosition }] }]}>
+                        <Animated.View style={[styles.containerSearchBar, { transform: [{ translateY: inputPosition }] }]}>
                             <SearchBar logoOpacity={logoOpacity} inputPosition={inputPosition} />
                         </Animated.View>
                         <StatusBar style="auto" />
@@ -66,9 +66,16 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     containerTitle: {
-        flex: 1,
+        flex: 3,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'blue'
+    },
+    containerSearchBar: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'pink',
+        padding: 20,
     },
     backgroundImage: {
         flex: 1,

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity, Keyboard, Animated } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity, Keyboard, Animated,
+    KeyboardAvoidingView,
+    TouchableWithoutFeedback,
+    Platform,
+ } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ListSearch from './ListSearch';
@@ -25,7 +29,7 @@ export default function SearchBar({logoOpacity, inputPosition}) {
                 useNativeDriver: true,
             }),
             Animated.timing(inputPosition, {
-                toValue: -200,
+                toValue: -100,
                 duration: 300,
                 useNativeDriver: true,
             }),
@@ -89,27 +93,31 @@ export default function SearchBar({logoOpacity, inputPosition}) {
     }, [inputText]);
     
     return (
-        <View style={styles.containerSearch}>
-            <View style={[styles.inputContainer, suggestionsStudents.length > 0 && inputIsFocused ? styles.inputWidthList : null]}>
-                <Icon name="search-outline" size={24} color="#D6D6D6" />
-                <TextInput
-                    style={styles.input}
-                    value={inputText}
-                    onChangeText={setInputText}
-                    onSubmitEditing={handleSearch}
-                    placeholder="Search student..."
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                />
+            <View style={styles.inner}>
+                <View style={[styles.inputContainer, suggestionsStudents.length > 0 && inputIsFocused ? styles.inputWidthList : null]}>
+                    <Icon name="search-outline" size={24} color="#D6D6D6" />
+                    <TextInput
+                        style={styles.input}
+                        value={inputText}
+                        onChangeText={setInputText}
+                        onSubmitEditing={handleSearch}
+                        placeholder="Search student..."
+                        onFocus={handleFocus}
+                        onBlur={handleBlur}
+                    />
+                </View>
+                {suggestionsStudents.length > 0 && inputIsFocused && (
+                    <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length}/>
+                )}
             </View>
-            {suggestionsStudents.length > 0 && inputIsFocused && (
-                <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length}/>
-            )}
-        </View>
-    );
+
+    )
 }
 
 const styles = StyleSheet.create({
+    inner: {
+        backgroundColor: 'red',
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
