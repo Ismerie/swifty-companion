@@ -3,11 +3,19 @@ import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity, K
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
     Platform,
+<<<<<<< HEAD
+=======
+    Dimensions,
+>>>>>>> a271bc6 (feat: Keyboard resize Flatlist in HomeScreen)
  } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import ListSearch from './ListSearch';
 import { apiClient } from '../Utils/constant';
+
+const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
+const spacing = screenWidth / 12
 
 export default function SearchBar({logoOpacity, inputPosition}) {
     const [inputText, setInputText] = useState('');
@@ -29,7 +37,11 @@ export default function SearchBar({logoOpacity, inputPosition}) {
                 useNativeDriver: true,
             }),
             Animated.timing(inputPosition, {
+<<<<<<< HEAD
                 toValue: -100,
+=======
+                toValue: -350,
+>>>>>>> a271bc6 (feat: Keyboard resize Flatlist in HomeScreen)
                 duration: 300,
                 useNativeDriver: true,
             }),
@@ -93,7 +105,11 @@ export default function SearchBar({logoOpacity, inputPosition}) {
     }, [inputText]);
     
     return (
+<<<<<<< HEAD
             <View style={styles.inner}>
+=======
+            <>
+>>>>>>> a271bc6 (feat: Keyboard resize Flatlist in HomeScreen)
                 <View style={[styles.inputContainer, suggestionsStudents.length > 0 && inputIsFocused ? styles.inputWidthList : null]}>
                     <Icon name="search-outline" size={24} color="#D6D6D6" />
                     <TextInput
@@ -109,12 +125,17 @@ export default function SearchBar({logoOpacity, inputPosition}) {
                 {suggestionsStudents.length > 0 && inputIsFocused && (
                     <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length}/>
                 )}
+<<<<<<< HEAD
             </View>
+=======
+            </>
+>>>>>>> a271bc6 (feat: Keyboard resize Flatlist in HomeScreen)
 
     )
 }
 
 const styles = StyleSheet.create({
+<<<<<<< HEAD
     inner: {
         backgroundColor: 'red',
     },
@@ -129,21 +150,25 @@ const styles = StyleSheet.create({
         justifyContent: 'start',
         alignItems: 'center',
     },
+=======
+>>>>>>> a271bc6 (feat: Keyboard resize Flatlist in HomeScreen)
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 10,
         backgroundColor: 'white',
         paddingHorizontal: 10,
-        width: 300,
         borderWidth: 3,
         borderColor: 'white',
+        width: '80%',
+        height: screenWidth / 7.2,
+        fontSize: screenWidth / 18,
     },
     input: {
-        flex: 1,
         paddingVertical: 10,
         fontSize: 16,
         color: 'black',
+        width: '90%'
     },
     inputWidthList: {
         borderBottomLeftRadius: 0,

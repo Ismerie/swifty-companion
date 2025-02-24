@@ -1,14 +1,34 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity, Dimensions, Keyboard } from 'react-native';
 import axios from 'axios';
 
+const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
+const spacing = screenWidth / 12
+
 export default function ListSearch({listStudents, lengthSearch}) {
+    const [isKeyboardVisible, setKeyboardVisible] = useState(true);
 
     console.log(listStudents)
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+            setKeyboardVisible(true);
+        });
+        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+            setKeyboardVisible(false);
+        });
+
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
+    }, []);
+
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { maxHeight: isKeyboardVisible ? screenHeight / 3 : screenHeight / 1.5 }]}>
             <FlatList
-                style={styles.containerList}
+                style={[styles.containerList, { maxHeight: isKeyboardVisible ? screenHeight / 3 : screenHeight / 1.5 }]}
                 data={listStudents}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
@@ -29,18 +49,23 @@ export default function ListSearch({listStudents, lengthSearch}) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "white",
-        width: 300,
+        position: "relative",
+		backgroundColor: '#fff',
+        borderRadius: 5,
+        width: '80%',
+		maxHeight: screenHeight / 3,
+    },
+    containerList: {
+        position: "absolute",
+        maxHeight: screenHeight / 3,
+        backgroundColor: 'white',
+        width: '100%',
         borderRadius: 10,
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
         paddingBottom: 10,
     },
-    containerList: {
-
-    },
     card: {
-        flex: 1,
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
