@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity, Dimensions, Keyboard } from 'react-native';
-import axios from 'axios';
+import { StyleSheet,
+    Text,
+    View,
+    Image,
+    FlatList,
+    TouchableOpacity,
+    Dimensions,
+    Keyboard 
+} from 'react-native';
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
@@ -8,8 +15,6 @@ const spacing = screenWidth / 12
 
 export default function ListSearch({listStudents, lengthSearch}) {
     const [isKeyboardVisible, setKeyboardVisible] = useState(true);
-
-    console.log(listStudents)
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity, Keyboard, Animated,
-    KeyboardAvoidingView,
-    TouchableWithoutFeedback,
-    Platform,
+import { StyleSheet,
+    View,
+    TextInput,
+    Keyboard,
     Dimensions,
- } from 'react-native';
+} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 import ListSearch from './ListSearch';
 import { apiClient } from '../Utils/constant';
@@ -17,28 +18,9 @@ const spacing = screenWidth / 12
 export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [inputText, setInputText] = useState('');
     const [suggestionsStudents, setSuggestionsStudents] = useState([]);
-    
-    console.log(suggestionsStudents)
 
     function handleSearch(text) {
         Keyboard.dismiss();
-    }
-
-    // Fusionner les versions de handleFocus
-    function handleFocus() {
-        setInputIsFocused(true);
-        Animated.parallel([
-            Animated.timing(logoOpacity, {
-                toValue: 0,
-                duration: 300,
-                useNativeDriver: true,
-            }),
-            Animated.timing(inputPosition, {
-                toValue: -350,  // Choisir la position ici
-                duration: 300,
-                useNativeDriver: true,
-            }),
-        ]).start();
     }
 
     const getSuggestionsStudents = async (searchStudent) => {
@@ -53,6 +35,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                     'range[login]': `${searchStudent.toLowerCase()},${searchStudent.toLowerCase()}z`
                 }
             });
+            if (res.status != "200") throw new Error('Error API 42');
             if (res.data) {
                 const suggestions = res.data.map(user => ({
                     id: user.id,
@@ -66,6 +49,12 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
         }
         catch (error) {
             console.log(error)
+            Toast.show({
+                type: ALERT_TYPE.DANGER,
+                title: 'Error',
+                textBody: 'Error connecting to API 42. Retry later.',
+            });
+            
         }
     }
 
@@ -76,7 +65,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
             } else {
                 setSuggestionsStudents([]);
             }
-        }, 100);
+        }, 300); // Attente de 500ms avant d'envoyer la requête
         
         return () => clearTimeout(delaySearch);
     }, [inputText]);

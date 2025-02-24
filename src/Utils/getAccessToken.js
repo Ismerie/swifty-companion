@@ -10,8 +10,6 @@ let accessToken = null;
 let tokenExpiration = null;
 
 const getAccessToken = async () => {
-    console.log("Token actuel:", accessToken);
-    console.log("Expiration actuelle:", tokenExpiration);
 
     // Vérifier si le token est encore valide
     if (accessToken && tokenExpiration && new Date() < tokenExpiration) {
@@ -27,11 +25,9 @@ const getAccessToken = async () => {
             client_secret: CLIENT_SECRET,
         });
 
-        // Stocker le token et son expiration
         accessToken = response.data.access_token;
         tokenExpiration = new Date(Date.now() + response.data.expires_in * 1000); // Conversion en millisecondes
 
-        console.log("Nouveau token obtenu:", accessToken);
         return accessToken;
     } catch (error) {
         console.error('Erreur lors de la récupération du token:', error.response?.data || error.message);

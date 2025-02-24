@@ -3,21 +3,13 @@ import {
     StyleSheet,
     SafeAreaView,
     View,
-    TextInput,
     ImageBackground,
-    Image,
-    KeyboardAvoidingView,
     TouchableWithoutFeedback,
-    Platform,
     Keyboard,
     Animated,
-    StatusBar,
-	FlatList,
-	TouchableOpacity,
-	Text,
     Dimensions,
 } from 'react-native';
-
+import { AlertNotificationRoot } from 'react-native-alert-notification';
 import SearchBar from './Home/SearchBar'
 
 const screenHeight = Dimensions.get('window').height;
@@ -64,7 +56,7 @@ export default function HomeScreen() {
         }
 
     return (
-        <>
+        <AlertNotificationRoot>        
             <ImageBackground
                 source={require('../assets/background42.png')}
                 style={styles.backgroundImage}
@@ -96,7 +88,7 @@ export default function HomeScreen() {
                 </SafeAreaView>
                     </TouchableWithoutFeedback>
             </ImageBackground>
-        </>
+        </AlertNotificationRoot>
     );
     }
     
