@@ -28,6 +28,40 @@ export default function HomeScreen() {
     // Animated values
     const logoOpacity = useRef(new Animated.Value(1)).current;
     const translateY = useRef(new Animated.Value(0)).current;
+    const [inputIsFocused, setInputIsFocused] = useState(false);
+
+    function handleFocus() {
+        setInputIsFocused(true);
+        Animated.parallel([
+            Animated.timing(logoOpacity, {
+                toValue: 0,
+                duration: 300,
+                useNativeDriver: true,
+            }),
+            Animated.timing(translateY, {
+                toValue: -350,
+                duration: 300,
+                useNativeDriver: true,
+            }),
+        ]).start();
+    }
+    
+    function handleBlur() {
+            setInputIsFocused(false);
+            Animated.parallel([
+                Animated.timing(logoOpacity, {
+                    toValue: 1,
+                    duration: 200,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(translateY, {
+                    toValue: 0,
+                    duration: 300,
+                    useNativeDriver: true,
+                }),
+            ]).start();
+            Keyboard.dismiss();
+        }
 
     return (
         <>
@@ -36,6 +70,7 @@ export default function HomeScreen() {
                 style={styles.backgroundImage}
                 resizeMode="cover"
             >
+                    <TouchableWithoutFeedback onPress={handleBlur} accessible={false}>
                 <SafeAreaView style={styles.container}>
                         <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }]}]}>
                         <Animated.Image 
@@ -44,20 +79,22 @@ export default function HomeScreen() {
                         />
                         <View style={{
                             alignItems: 'center',
+                            justifyContent: 'end',
                             width: '100%',
                         }}>
-                            <SearchBar  logoOpacity={logoOpacity} inputPosition={translateY}/>
-                            <View style={{
+                            <SearchBar handleBlur={handleBlur} handleFocus={handleFocus} inputIsFocused={inputIsFocused}/>
+                            {/* <View style={{
                                 position: "absolute",
                                 bottom: -screenWidth / 7.2,
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 width: '100%',
                             }}>
-                            </View>
+                            </View> */}
                         </View>
                     </Animated.View>
                 </SafeAreaView>
+                    </TouchableWithoutFeedback>
             </ImageBackground>
         </>
     );

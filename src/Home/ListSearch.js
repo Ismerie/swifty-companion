@@ -31,6 +31,7 @@ export default function ListSearch({listStudents, lengthSearch}) {
                 style={[styles.containerList, { maxHeight: isKeyboardVisible ? screenHeight / 3 : screenHeight / 1.5 }]}
                 data={listStudents}
                 keyExtractor={item => item.id.toString()}
+                keyboardShouldPersistTaps="handled" 
                 renderItem={({ item }) => (
                     <TouchableOpacity style={styles.card}>
                     {item.image != null ? (

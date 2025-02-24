@@ -3,10 +3,7 @@ import { StyleSheet, Text, View, TextInput, Image, FlatList, TouchableOpacity, K
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
     Platform,
-<<<<<<< HEAD
-=======
     Dimensions,
->>>>>>> a271bc6 (feat: Keyboard resize Flatlist in HomeScreen)
  } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -17,9 +14,8 @@ const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 const spacing = screenWidth / 12
 
-export default function SearchBar({logoOpacity, inputPosition}) {
+export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [inputText, setInputText] = useState('');
-    const [inputIsFocused, setInputIsFocused] = useState(false);
     const [suggestionsStudents, setSuggestionsStudents] = useState([]);
     
     console.log(suggestionsStudents)
@@ -28,6 +24,7 @@ export default function SearchBar({logoOpacity, inputPosition}) {
         Keyboard.dismiss();
     }
 
+    // Fusionner les versions de handleFocus
     function handleFocus() {
         setInputIsFocused(true);
         Animated.parallel([
@@ -37,27 +34,7 @@ export default function SearchBar({logoOpacity, inputPosition}) {
                 useNativeDriver: true,
             }),
             Animated.timing(inputPosition, {
-<<<<<<< HEAD
-                toValue: -100,
-=======
-                toValue: -350,
->>>>>>> a271bc6 (feat: Keyboard resize Flatlist in HomeScreen)
-                duration: 300,
-                useNativeDriver: true,
-            }),
-        ]).start();
-    }
-
-    function handleBlur() {
-        setInputIsFocused(false);
-        Animated.parallel([
-            Animated.timing(logoOpacity, {
-                toValue: 1,
-                duration: 200,
-                useNativeDriver: true,
-            }),
-            Animated.timing(inputPosition, {
-                toValue: 0,
+                toValue: -350,  // Choisir la position ici
                 duration: 300,
                 useNativeDriver: true,
             }),
@@ -73,7 +50,7 @@ export default function SearchBar({logoOpacity, inputPosition}) {
         try {
             const res = await apiClient.get('/users', {
                 params: {
-                    'range[login]': `${searchStudent.toLowerCase()},${searchStudent.toLowerCase()}z` // Filtrer par login
+                    'range[login]': `${searchStudent.toLowerCase()},${searchStudent.toLowerCase()}z`
                 }
             });
             if (res.data) {
@@ -99,59 +76,33 @@ export default function SearchBar({logoOpacity, inputPosition}) {
             } else {
                 setSuggestionsStudents([]);
             }
-        }, 100); // Attente de 500ms avant d'envoyer la requête
+        }, 100);
         
-        return () => clearTimeout(delaySearch); // Annule la requête précédente si l'utilisateur tape encore
+        return () => clearTimeout(delaySearch);
     }, [inputText]);
     
     return (
-<<<<<<< HEAD
-            <View style={styles.inner}>
-=======
-            <>
->>>>>>> a271bc6 (feat: Keyboard resize Flatlist in HomeScreen)
-                <View style={[styles.inputContainer, suggestionsStudents.length > 0 && inputIsFocused ? styles.inputWidthList : null]}>
-                    <Icon name="search-outline" size={24} color="#D6D6D6" />
-                    <TextInput
-                        style={styles.input}
-                        value={inputText}
-                        onChangeText={setInputText}
-                        onSubmitEditing={handleSearch}
-                        placeholder="Search student..."
-                        onFocus={handleFocus}
-                        onBlur={handleBlur}
-                    />
-                </View>
-                {suggestionsStudents.length > 0 && inputIsFocused && (
-                    <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length}/>
-                )}
-<<<<<<< HEAD
+        <>
+            <View style={[styles.inputContainer, suggestionsStudents.length > 0 && inputIsFocused ? styles.inputWidthList : null]}>
+                <Icon name="search-outline" size={24} color="#D6D6D6" />
+                <TextInput
+                    style={styles.input}
+                    value={inputText}
+                    onChangeText={setInputText}
+                    onSubmitEditing={handleSearch}
+                    placeholder="Search student..."
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                />
             </View>
-=======
-            </>
->>>>>>> a271bc6 (feat: Keyboard resize Flatlist in HomeScreen)
-
-    )
+            {suggestionsStudents.length > 0 && inputIsFocused && (
+                <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length}/>
+            )}
+        </>
+    );
 }
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
-    inner: {
-        backgroundColor: 'red',
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        justifyContent: 'center',
-        alignItems: 'stretch',
-    },
-    containerSearch: {
-        flex: 1,
-        justifyContent: 'start',
-        alignItems: 'center',
-    },
-=======
->>>>>>> a271bc6 (feat: Keyboard resize Flatlist in HomeScreen)
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
