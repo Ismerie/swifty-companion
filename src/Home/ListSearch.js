@@ -8,13 +8,38 @@ import { StyleSheet,
     Dimensions,
     Keyboard 
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useStudent } from '../Utils/studentContext';
+import { apiClient } from '../Utils/constant';
 
 const screenHeight = Dimensions.get('window').height;
 const screenWidth = Dimensions.get('window').width;
 const spacing = screenWidth / 12
 
 export default function ListSearch({listStudents, lengthSearch}) {
+    const { setStudent } = useStudent();
+    const navigation = useNavigation();
     const [isKeyboardVisible, setKeyboardVisible] = useState(true);
+    
+    const handleSelectStudent = async (id) => {
+        try {
+            const res = await apiClient.get(`/users/${id}`);
+            if (res.status != "200") throw new Error('Error API 42');
+            if (res.data) {
+                setStudent(res.data)
+            }
+            navigation.navigate('ProfileScreen', {idStudent: id});
+        }
+        catch (error) {
+            console.log(error)
+            Toast.show({
+                type: ALERT_TYPE.DANGER,
+                title: 'Error',
+                textBody: 'Error connecting to API 42. Retry later.',
+            });
+            
+        }
+    }
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
@@ -38,7 +63,10 @@ export default function ListSearch({listStudents, lengthSearch}) {
                 keyExtractor={item => item.id.toString()}
                 keyboardShouldPersistTaps="handled" 
                 renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.card}>
+                    <TouchableOpacity style={styles.card}
+                        onPress={() => {
+                            handleSelectStudent(item.id);
+                        }}>
                     {item.image != null ? (
                         <Image source={{ uri: item.image}} style={styles.image} />
                     ):(
