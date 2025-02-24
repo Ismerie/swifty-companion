@@ -28,7 +28,7 @@ export default function ListSearch({listStudents, lengthSearch}) {
             if (res.data) {
                 setStudent(res.data)
             }
-            navigation.navigate('ProfileScreen', {idStudent: id});
+            navigation.navigate('ProfileScreen');
         }
         catch (error) {
             console.log(error)

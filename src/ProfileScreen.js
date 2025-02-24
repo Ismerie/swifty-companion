@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet,
+	Text,
+	View,
+	TextInput,
+	SafeAreaView,
+	Dimensions,
+} from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useStudent } from './Utils/studentContext';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+import TopBar from './Profile/TopBar'
+
+const screenHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
+const spacing = screenWidth / 12
 
 export default function ProfileScreen() {
 	const { student } = useStudent();
 
 	return (
-			<View style={styles.container}>
+			<SafeAreaView style={styles.container}>
+				<TopBar/>
                 <Text>{student.login}</Text>
-            </View>
+            </SafeAreaView>
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: "center",
-		justifyContent: "center",
+		padding: 10,
 	},
 });
