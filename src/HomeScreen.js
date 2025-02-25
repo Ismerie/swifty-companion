@@ -31,7 +31,7 @@ export default function HomeScreen() {
                 useNativeDriver: true,
             }),
             Animated.timing(translateY, {
-                toValue: -350,
+                toValue: -screenHeight * 0.3,
                 duration: 300,
                 useNativeDriver: true,
             }),
@@ -97,7 +97,6 @@ export default function HomeScreen() {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "#0003",
     },
     backgroundImage: {
         flex: 1,

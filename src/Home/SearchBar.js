@@ -36,7 +36,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                 }
             });
             if (res.status != "200") throw new Error('Error API 42');
-            if (res.data) {
+            if (res.data.length > 0) {
                 const suggestions = res.data.map(user => ({
                     id: user.id,
                     login: user.login,
@@ -45,6 +45,14 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                     image: user.image?.versions?.small || null
                 }))
                 setSuggestionsStudents(suggestions);
+            }
+            else if (res.data.length === 0) {
+                Toast.show({
+                    type: ALERT_TYPE.WARNING,
+                    title: 'No results',
+                    textBody: 'No student found.',
+                });
+                setSuggestionsStudents([]);
             }
         }
         catch (error) {
@@ -65,7 +73,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
             } else {
                 setSuggestionsStudents([]);
             }
-        }, 300); // Attente de 500ms avant d'envoyer la requête
+        }, 300); // Attente de 300ms avant d'envoyer la requête
         
         return () => clearTimeout(delaySearch);
     }, [inputText]);
