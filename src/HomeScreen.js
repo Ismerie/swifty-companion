@@ -7,14 +7,10 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
     Animated,
-    Dimensions,
 } from 'react-native';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
 import SearchBar from './Home/SearchBar'
-
-const screenHeight = Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-const spacing = screenWidth / 12
+import { screenHeight, screenWidth, spacing } from './Utils/constant';
 
 export default function HomeScreen() {
     // Animated values

@@ -5,16 +5,11 @@ import { StyleSheet,
     Image,
     FlatList,
     TouchableOpacity,
-    Dimensions,
     Keyboard 
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useStudent } from '../Utils/studentContext';
-import { apiClient } from '../Utils/constant';
-
-const screenHeight = Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-const spacing = screenWidth / 12
+import { apiClient, screenHeight } from '../Utils/constant';
 
 export default function ListSearch({listStudents, lengthSearch}) {
     const { setStudent } = useStudent();

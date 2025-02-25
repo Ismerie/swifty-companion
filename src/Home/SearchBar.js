@@ -3,17 +3,12 @@ import { StyleSheet,
     View,
     TextInput,
     Keyboard,
-    Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 import ListSearch from './ListSearch';
-import { apiClient } from '../Utils/constant';
-
-const screenHeight = Dimensions.get('window').height;
-const screenWidth = Dimensions.get('window').width;
-const spacing = screenWidth / 12
+import { apiClient, screenWidth } from '../Utils/constant';
 
 export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [inputText, setInputText] = useState('');
