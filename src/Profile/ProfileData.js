@@ -19,8 +19,8 @@ export default function ProfileData() {
     }
 
     const totalLevel = student?.cursus_users?.[1]?.level || 0
-    const levelTrunc = Math.trunc(totalLevel) || 0;  // Valeur du niveau, par défaut 0 si non renseigné
-    const decimalPartLevel = Math.trunc(((totalLevel - levelTrunc) * 100)); // Résultat : 0.345
+    const levelTrunc = Math.trunc(totalLevel) || 0; 
+    const decimalPartLevel = Math.trunc(((totalLevel - levelTrunc) * 100));
 
     return (
         <>
@@ -98,21 +98,20 @@ const styles = StyleSheet.create({
         padding: 10,
         flexDirection: 'row',
         alignItems: 'end',
-        // backgroundColor: 'red',
     },
     level: {
         fontSize: 34,
     },
     levelProgressContainer: {
-        flexDirection: 'column',  // Organise les éléments verticalement
+        flexDirection: 'column',
         flex: 1,
-        justifyContent: 'flex-start', // Assure que les éléments sont alignés en haut
+        justifyContent: 'flex-start',
         marginLeft: 5,
     },
     decimalLevel: {
         fontSize: 14,
-        textAlign: 'start', // Aligne le texte au centre
-        marginBottom: 5, // Espacement entre le pourcentage et la barre
+        textAlign: 'start',
+        marginBottom: 5,
     },
     progressBarContainer: {
         height: 15,

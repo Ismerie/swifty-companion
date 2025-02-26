@@ -29,7 +29,7 @@ export default function ProfileScreen() {
 				if (res.status !== 200) throw new Error('Error API 42');
 				if (res.data) {
 					setStudent(res.data);
-					console.log(res.data);
+					// console.log(res.data);
 				}
 			} catch (error) {
 				console.log(error);
@@ -47,26 +47,26 @@ export default function ProfileScreen() {
 					<TopBar/>
 					<ProfileData/>
 				</View>
-                <Tab.Navigator tabBarPosition='bottom'
-                screenOptions={({ route }) => ({
-                    tabBarIcon: ({ color, size }) => {
-                        let iconName;
-                        if (route.name === 'Projets') iconName = 'folder-outline';
-                        else if (route.name === 'Skills') iconName = 'bulb-outline';
-                        return <Icon name={iconName} size={size} color={color} />;
-                    },
+				<Tab.Navigator tabBarPosition='bottom'
+				screenOptions={({ route }) => ({
+					tabBarIcon: ({ color, size }) => {
+						let iconName;
+						if (route.name === 'Projets') iconName = 'folder-outline';
+						else if (route.name === 'Skills') iconName = 'bulb-outline';
+						return <Icon name={iconName} size={size} color={color} />;
+					},
 					tabBarStyle: styles.tabBar,
-                    tabBarActiveTintColor: '#274c77',
-                    tabBarInactiveTintColor: 'gray',
+					tabBarActiveTintColor: '#274c77',
+					tabBarInactiveTintColor: 'gray',
 					tabBarIndicatorStyle: { 
-            		backgroundColor: '#274c77', // 🔴 Change ici la couleur de l'indicateur
-        },
-                })}
-            >
-                <Tab.Screen name="Projets" component={ProjectsList} />
-                <Tab.Screen name="Skills" component={SkillsList} />
-            </Tab.Navigator>
-            </SafeAreaView>
+					backgroundColor: '#274c77',
+		},
+				})}
+			>
+				<Tab.Screen name="Projets" component={ProjectsList} />
+				<Tab.Screen name="Skills" component={SkillsList} />
+			</Tab.Navigator>
+			</SafeAreaView>
 	)
 }
 
@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	tabBar: {
-        backgroundColor: '#cccccc',
-        borderTopWidth: 1,
-        borderTopColor: '#e8eddf',
-    }
+		backgroundColor: '#cccccc',
+		borderTopWidth: 1,
+		borderTopColor: '#e8eddf',
+	}
 });
