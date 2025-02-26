@@ -21,4 +21,4 @@ apiClient.interceptors.request.use(async (config) => {
 
 export const screenHeight = Dimensions.get('window').height;
 export const screenWidth = Dimensions.get('window').width;
-export const spacing = screenWidth / 12
+export const spacing = screenWidth / 11

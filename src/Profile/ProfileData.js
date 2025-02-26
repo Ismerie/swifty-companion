@@ -41,7 +41,6 @@ export default function ProfileData() {
                     </View>
                 </View>
             </View>
-            
             <View style={styles.levelContainer}>
                 <Text style={styles.level}>{levelTrunc}</Text>
                 <View style={styles.levelProgressContainer}>
@@ -89,6 +88,7 @@ const styles = StyleSheet.create({
     },
     email: {
         fontSize: 16,
+        marginLeft: 5,
     },
     location: {
         flexDirection: 'row',
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',  // Organise les éléments verticalement
         flex: 1,
         justifyContent: 'flex-start', // Assure que les éléments sont alignés en haut
+        marginLeft: 5,
     },
     decimalLevel: {
         fontSize: 14,

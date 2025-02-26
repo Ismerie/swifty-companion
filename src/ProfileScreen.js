@@ -4,11 +4,13 @@ import { StyleSheet,
 	View,
 	TextInput,
 	SafeAreaView,
+	StatusBar,
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useStudent } from './Utils/studentContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { screenHeight, screenWidth, apiClient } from './Utils/constant';
+
 
 import TopBar from './Profile/TopBar'
 import ProfileData from './Profile/ProfileData'
@@ -40,6 +42,7 @@ export default function ProfileScreen() {
 				<TopBar/>
 				<ProfileData/>
                 <Text>Hello</Text>
+				<StatusBar backgroundColor="transparent" barStyle="dark-content" translucent={true} />
             </SafeAreaView>
 	)
 }
