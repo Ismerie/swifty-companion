@@ -35,7 +35,7 @@ export default function ProfileData() {
                 <View style={styles.containerPersonalInfos}>
                     <TextInput style={styles.name}>{student.displayname}</TextInput>
                     <View style={styles.containerMail}>
-                        <Icon name="mail-outline" size={18} color="#D6D6D6"/>
+                        <Icon name="mail-outline" size={18} color="#274c77"/>
                         <TextInput style={styles.email}>{student.email}</TextInput>
                         
                     </View>
@@ -47,7 +47,7 @@ export default function ProfileData() {
                     <View style={styles.containerInfosLevel}>
                         <Text style={styles.decimalLevel}>{decimalPartLevel}%</Text>
                         <View style={styles.location}>
-                            <Icon name="location-outline" size={18} color="#D6D6D6"/>
+                            <Icon name="location-outline" size={18} color="#274c77"/>
                             <Text>{student?.campus?.[0]?.name || "Non renseigné"}</Text>
                         </View>
                     </View>
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     },
     progressBar: {
         height: '100%',
-        backgroundColor: '#118ab2',
+        backgroundColor: '#274c77',
         borderRadius: 5,
     },
     containerInfosLevel: {
