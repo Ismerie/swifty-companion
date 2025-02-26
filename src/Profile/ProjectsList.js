@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { useStudent } from '../Utils/studentContext';
+import { screenHeight, screenWidth } from '../Utils/constant';
 
 export default function ProjectsList() {
     const { student } = useStudent();
@@ -66,15 +67,17 @@ export default function ProjectsList() {
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <FlatList
                 data={filteredProjects}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
-                    <View>
-                        <Text>{item.project.name}</Text>
+                    <View style={styles.card}>
+                        <View>
+                            <Text style={styles.nameProject}>{item.project.name}</Text>
+                            <Text style={styles.timeProject}>{calculateElapsedTime(item.marked_at)}</Text>
+                        </View>
                         <Text>{item.final_mark}</Text>
-                        <Text>{calculateElapsedTime(item.marked_at)}</Text>
                     </View>
                 )}
             />
@@ -85,6 +88,18 @@ export default function ProjectsList() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
+    },
+    card: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingLeft: screenWidth * 0.08,
+        paddingRight: screenWidth * 0.08,
+        marginBottom: screenHeight * 0.009
+    },
+    nameProject: {
+
+    },
+    timeProject: {
+
     },
 });
