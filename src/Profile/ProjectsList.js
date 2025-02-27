@@ -16,8 +16,9 @@ export default function ProjectsList() {
             const filtered = student.projects_users.filter(
                 item => item.marked === true && item.cursus_ids[0] === 21
             );
+            console.log(filtered[0])
             setFilteredProjects(filtered);
-            fetchProjectDetails(filtered);
+            // fetchProjectDetails(filtered);
         }
     }, [student]);
 
@@ -113,7 +114,7 @@ export default function ProjectsList() {
                         </View>
                         <View style={styles.markContainer}>
                             <Text style={styles.mark}>{item.final_mark}</Text>
-                            {!item.project.validated && (
+                            {(item["validated?"] === false) && (
                                 <Icon name="close-outline" size={24} color="red" style={styles.iconMark}/>
                             )}
                         </View>
@@ -163,9 +164,10 @@ const styles = StyleSheet.create({
     },
     markContainer: {
         flexDirection: 'row', 
-        alignItems: 'end',
+        alignSelf: 'flex-end',
     },
     iconMark: {
+        alignSelf: 'flex-end'
     },
     timeProject: {
     },
