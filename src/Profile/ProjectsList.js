@@ -5,7 +5,7 @@ import { screenHeight, screenWidth, apiClient } from '../Utils/constant';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function ProjectsList() {
-    const { student } = useStudent();
+    const { student, colorCoalition } = useStudent();
     const [loading, setLoading] = useState(true);
     const [filteredProjects, setFilteredProjects] = useState([]);
     const [projectDetails, setProjectDetails] = useState({}); // Stocke les détails récupérés

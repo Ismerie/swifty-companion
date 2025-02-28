@@ -21,7 +21,7 @@ export default function SkillsList() {
             if (student) {
                 setLoading(false);
                 const skills = student.cursus_users[1].skills;
-                setSkills(skills);
+                setSkills(skills); 
                 console.log(student.cursus_users[1].skills[0].name)
                 
             }
