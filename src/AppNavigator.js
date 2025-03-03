@@ -16,8 +16,7 @@ export default function AppNavigator() {
 		<>
             <NavigationContainer styles={styles.container}>
                 <Stack.Navigator
-                    // initialRouteName={student ? "ProfileScreen" : "HomeScreen"}
-                    initialRouteName='ProfileScreen'
+                    initialRouteName={student ? "ProfileScreen" : "HomeScreen"}
                     screenOptions={({ route, navigation }) => ({
                         headerShown: false,
                     })}

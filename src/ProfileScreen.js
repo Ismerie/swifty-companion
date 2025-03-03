@@ -25,58 +25,41 @@ export default function ProfileScreen() {
 	const Tab = createMaterialTopTabNavigator();
 	console.log(colorCoalition);
 
-	function addTransparencyToHex(hex, alpha) {
-		hex = hex.replace(/^#/, '');
-	
-		if (hex.length === 3) {
-			hex = hex.split('').map(c => c + c).join('');
-		}
-	
-		if (hex.length !== 6) {
-			console.warn("Format hex invalide :", hex);
-			return "#FFFFFF33"; // Blanc avec 20% d'opacité par défaut
-		}
-	
-		// Convertit alpha (0-1) en valeur hexadécimale
-		let alphaHex = Math.round(alpha * 255).toString(16).padStart(2, '0').toUpperCase();
-	
-		return `#${hex}${alphaHex}`;
-	}
 	
 
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const res = await apiClient.get(`/users/96778`);
-				if (res.status !== 200) throw new Error('Error API 42');
-				if (res.data) {
-					setStudent(res.data);
-					// console.log(res.data);
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		};
+		// const fetchData = async () => {
+		// 	try {
+		// 		const res = await apiClient.get(`/users/96778`);
+		// 		if (res.status !== 200) throw new Error('Error API 42');
+		// 		if (res.data) {
+		// 			setStudent(res.data);
+		// 			// console.log(res.data);
+		// 		}
+		// 	} catch (error) {
+		// 		console.log(error);
+		// 	}
+		// };
 
-		const fetchCoallition = async () => {
-			try {
-				const res = await apiClient.get(`/users/96778/coalitions`);
-				if (res.status !== 200) throw new Error('Error API 42');
-				if (res) {
-					console.log(res.data[0]);
-					setColorCoalition({
-						tranparence: addTransparencyToHex(res.data[0].color, 0.2),
-						color: res.data[0].color
-					})
+		// const fetchCoallition = async () => {
+		// 	try {
+		// 		const res = await apiClient.get(`/users/96778/coalitions`);
+		// 		if (res.status !== 200) throw new Error('Error API 42');
+		// 		if (res) {
+		// 			console.log(res.data[0]);
+		// 			setColorCoalition({
+		// 				tranparence: addTransparencyToHex(res.data[0].color, 0.2),
+		// 				color: res.data[0].color
+		// 			})
 					
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		};
+		// 		}
+		// 	} catch (error) {
+		// 		console.log(error);
+		// 	}
+		// };
 	
-		fetchData();
-		fetchCoallition();
+		// fetchData();
+		// fetchCoallition();
 	}, []);
 	
 

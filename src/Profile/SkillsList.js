@@ -32,7 +32,7 @@ export default function SkillsList() {
 
     const getDarkerColor = (hexColor, level, maxLevel) => {
         // Calcul du pourcentage d'assombrissement (plus le niveau est haut, plus on assombrit)
-        const darkenAmount = Math.floor((+30* level) / maxLevel); // Ajuste l'intensité de l'effet
+        const darkenAmount = Math.floor((+20* level) / maxLevel); // Ajuste l'intensité de l'effet
     
         const lightenDarkenColor = (col, amt) => {
             let usePound = false;
@@ -61,11 +61,15 @@ export default function SkillsList() {
     
     useEffect(() => {
             if (student) {
+                let nbrCursus = student.cursus_users.length - 1
                 setLoading(false);
-                const skills = student.cursus_users[1].skills;
-                setSkills(skills);
-                console.log(student.cursus_users[1].skills[0].name)
-                levelMax.current = Math.trunc(student.cursus_users[1].skills[0].level) || 0;
+                if (student.cursus_users[nbrCursus]) {
+                    const skills = student.cursus_users[nbrCursus].skills;
+                    setSkills(skills);
+                    levelMax.current = Math.trunc(student.cursus_users[nbrCursus].skills[0].level) || 0;
+                }
+                else
+                    setSkills([]);
                 console.log(colorCoalition);
                 colorCard.current = colorCoalition.color;
                 
@@ -74,6 +78,7 @@ export default function SkillsList() {
 
     return (
         <View style={styles.container}>
+        {skills.length > 0 ? (
             <FlatList
                 data={skills}
                 keyExtractor={item => item.id.toString()}
@@ -86,7 +91,7 @@ export default function SkillsList() {
                                     styles.progressBar,
                                     { 
                                         width: `${PercentageSizeLevel(item.level, levelMax.current)}%`, 
-                                        backgroundColor: getDarkerColor(colorCoalition.color, item.level, levelMax.current) 
+                                        backgroundColor: getDarkerColor("#faedcd", item.level, levelMax.current) 
                                     }
                                 ]}
                             >
@@ -101,6 +106,9 @@ export default function SkillsList() {
                     </View>
                 )}
             />
+        ):(
+            <Text style={styles.emptySkills}>No skills yet</Text>
+        )}
         </View>
     )
 }
@@ -146,4 +154,8 @@ const styles = StyleSheet.create({
         borderEndEndRadius: 20,
         borderTopRightRadius: 20,
     },
+    emptySkills: {
+        textAlign: 'center',
+        fontSize: 24,
+    }
 });

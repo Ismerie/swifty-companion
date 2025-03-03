@@ -35,7 +35,7 @@ export default function ProfileData() {
                 <View style={styles.containerPersonalInfos}>
                     <TextInput style={styles.name}>{student.displayname}</TextInput>
                     <View style={styles.containerMail}>
-                        <Icon name="mail-outline" size={18} color={colorCoalition.color}/>
+                        <Icon name="mail-outline" size={18} color="#faedcd"/>
                         <TextInput style={styles.email}>{student.email}</TextInput>
                         
                     </View>
@@ -47,13 +47,13 @@ export default function ProfileData() {
                     <View style={styles.containerInfosLevel}>
                         <Text style={styles.decimalLevel}>{decimalPartLevel}%</Text>
                         <View style={styles.location}>
-                            <Icon name="location-outline" size={18} color={colorCoalition.color}/>
+                            <Icon name="location-outline" size={18} color="#faedcd"/>
                             <Text>{student?.campus?.[0]?.name || "Non renseigné"}</Text>
                         </View>
                     </View>
                     <View style={styles.progressBarContainer}>
                         <View
-                            style={[styles.progressBar, { width: `${decimalPartLevel}%`, backgroundColor: `${colorCoalition.color}` }]} // Calcul de la largeur en fonction du niveau
+                            style={[styles.progressBar, { width: `${decimalPartLevel}%`, backgroundColor: `${colorCoalition.transparence}` }]} // Calcul de la largeur en fonction du niveau
                         />
                     </View>
                 </View>
