@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, Dimensions } from 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { screenHeight, screenWidth, spacing } from '../Utils/constant';
+import { useStudent } from '../Utils/studentContext';
 
 
 export default function ProfileScreen() {

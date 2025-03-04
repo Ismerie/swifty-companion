@@ -8,8 +8,8 @@ export const useStudent = () => {
 
 export const StudentProvider = ({ children }) => {
     const [student, setStudent] = useState(null);
-    const [skills, setSkills] = useState([]);
-    const [projects, setProjects] = useState([])
+    const [skills, setSkills] = useState(null);
+    const [projects, setProjects] = useState(null)
     const [colorCoalition, setColorCoalition] = useState({
         transparence: "#FFFFFF33",
         color: "#FFFFFF"

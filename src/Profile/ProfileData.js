@@ -6,7 +6,6 @@ import { TextInput } from 'react-native-gesture-handler';
 
 export default function ProfileData() {
     const { student, colorCoalition } = useStudent();
-    const [loading, setLoading] = useState(true);
     const [levelTrunc, setLevelTrunc] = useState(0);
     const [decimalPartLevel, setDecimalPartLevel] = useState(0);
 
@@ -22,20 +21,14 @@ export default function ProfileData() {
             }
             setLevelTrunc(Math.trunc(totalLevel) || 0); 
             setDecimalPartLevel(Math.trunc(((totalLevel - Math.trunc(totalLevel)) * 100)));
-            setLoading(false);
         }
     }, [student]);
-    
-    if (loading) {
-        return <Text>Chargement des données...</Text>;
-    }
-    
 
     return (
         <>
             <View style={styles.container}>
                 <Image 
-                    source={student.image?.versions?.medium 
+                    source={student?.image?.versions?.medium 
                         ? { uri: student.image.versions.large}
                         : require('./../../assets/default_profile_picture.jpg')
                     } 

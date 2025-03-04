@@ -16,79 +16,62 @@ import request from '../Utils/request';
 export default function ListSearch({listStudents, lengthSearch, setLoading}) {
     const { setStudent, setColorCoalition, setProjects, setSkills } = useStudent();
     const navigation = useNavigation();
-    const [isKeyboardVisible, setKeyboardVisible] = useState(true);
-    
-
-    function addTransparencyToHex(hex, alpha) {
-            hex = hex.replace(/^#/, '');
-        
-            if (hex.length === 3) {
-                hex = hex.split('').map(c => c + c).join('');
-            }
-        
-            if (hex.length !== 6) {
-                console.warn("Format hex invalide :", hex);
-                return "#FFFFFF33"; // Blanc avec 20% d'opacité par défaut
-            }
-        
-            // Convertit alpha (0-1) en valeur hexadécimale
-            let alphaHex = Math.round(alpha * 255).toString(16).padStart(2, '0').toUpperCase();
-        
-            return `#${hex}${alphaHex}`;
-        }
-        
+    const [isKeyboardVisible, setKeyboardVisible] = useState(true);        
 
         const handleSelectStudent = async (id) => {
             setLoading(true);
-            try {
-                const dataProfileStudent = await request.getProfileStudent(id); // Attendre la réponse
+            console.log(id)
+            navigation.navigate('ProfileScreen', { studentId: id });
+
+            // try {
+            //     const dataProfileStudent = await request.getProfileStudent(id); // Attendre la réponse
         
-                if (dataProfileStudent.success) {
-                    setStudent(dataProfileStudent.data);
-                } 
-                else 
-                    throw new Error('Error API 42')
+            //     if (dataProfileStudent.success) {
+            //         setStudent(dataProfileStudent.data);
+            //     } 
+            //     else 
+            //         throw new Error('Error API 42')
 
-                const filteredProjects = dataProfileStudent.data.projects_users.filter(
-                    item => item.marked === true && item.cursus_ids[0] === 21
-                );
-                setProjects(filteredProjects);
+            //     const filteredProjects = dataProfileStudent.data.projects_users.filter(
+            //         item => item.marked === true && item.cursus_ids[0] === 21
+            //     );
+            //     setProjects(filteredProjects);
 
-                for (let i = 0; i < dataProfileStudent.data.cursus_users.length; i++) {
-                    if (dataProfileStudent.data.cursus_users[i].cursus_id === 21) {
-                        setSkills(dataProfileStudent.data.cursus_users[i].skills);
-                        break
-                    }
-                    else if (i + 1 === dataProfileStudent.data.cursus_users.length) {
-                        setSkills([]);
-                    }
-                }
+            //     for (let i = 0; i < dataProfileStudent.data.cursus_users.length; i++) {
+            //         if (dataProfileStudent.data.cursus_users[i].cursus_id === 21) {
+            //             setSkills(dataProfileStudent.data.cursus_users[i].skills);
+            //             break
+            //         }
+            //         else if (i + 1 === dataProfileStudent.data.cursus_users.length) {
+            //             setSkills([]);
+            //         }
+            //     }
 
-                const dataColor = await request.getColorCoalitionStudent(id); // Attendre la réponse
-                if (dataColor.success && dataColor.data) {
-                    setColorCoalition({
-                        transparence: addTransparencyToHex(dataColor.data, 0.2),
-                        color: dataColor.data
-                    });
-                } 
-                else if (dataColor.success) {
-                    setColorCoalition({
-                        transparence: "#FFFFFF33",
-                        color: "#FFFFFF"
-                    });
-                }
-                else
-                    throw new Error('Error API 42')
+            //     const dataColor = await request.getColorCoalitionStudent(id); // Attendre la réponse
+            //     if (dataColor.success && dataColor.data) {
+            //         setColorCoalition({
+            //             transparence: addTransparencyToHex(dataColor.data, 0.2),
+            //             color: dataColor.data
+            //         });
+            //     } 
+            //     else if (dataColor.success) {
+            //         setColorCoalition({
+            //             transparence: "#FFFFFF33",
+            //             color: "#FFFFFF"
+            //         });
+            //     }
+            //     else
+            //         throw new Error('Error API 42')
         
-                navigation.navigate('ProfileScreen');
-            } catch (error) {
-                console.error("Error in handleSelectStudent:", error);
-                Toast.show({
-                    type: ALERT_TYPE.DANGER,
-                    title: 'Error',
-                    textBody: 'An unexpected error occurred. Please try again later.',
-                });
-            }
+            //     navigation.navigate('ProfileScreen');
+            // } catch (error) {
+            //     console.error("Error in handleSelectStudent:", error);
+            //     Toast.show({
+            //         type: ALERT_TYPE.DANGER,
+            //         title: 'Error',
+            //         textBody: 'An unexpected error occurred. Please try again later.',
+            //     });
+            //}
         };
         
 

@@ -11,12 +11,14 @@ import {
 import { AlertNotificationRoot } from 'react-native-alert-notification';
 import SearchBar from './Home/SearchBar'
 import { screenHeight, screenWidth, spacing } from './Utils/constant';
+import { useStudent } from './Utils/studentContext';
 
 export default function HomeScreen() {
     // Animated values
     const logoOpacity = useRef(new Animated.Value(1)).current;
     const translateY = useRef(new Animated.Value(0)).current;
     const [inputIsFocused, setInputIsFocused] = useState(false);
+    const { setStudent,setColorCoalition, setProjects, setSkills } = useStudent();
 
     function handleFocus() {
         setInputIsFocused(true);
@@ -50,6 +52,16 @@ export default function HomeScreen() {
             ]).start();
             Keyboard.dismiss();
         }
+        
+    // useEffect(() => {
+    //     setStudent(null);
+    //     setSkills(null);
+    //     setProjects(null);
+    //     setColorCoalition({
+    //         transparence: "#FFFFFF33",
+    //         color: "#FFFFFF"
+    //     });
+    // }, [])
 
     return (
         <AlertNotificationRoot>        
