@@ -88,7 +88,7 @@ export default function ProfileScreen() {
 								return <Icon name={iconName} size={size} color={color} />;
 							},
 							tabBarStyle: styles.tabBar,
-							tabBarActiveTintColor: '#274c77',
+							tabBarActiveTintColor: '#495057',
 							tabBarInactiveTintColor: 'gray',
 							tabBarIndicatorStyle: { 
 							backgroundColor: '#274c77',
@@ -110,9 +110,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	tabBar: {
-		backgroundColor: '#cccccc',
+		backgroundColor: '#e9ecef',
 		borderTopWidth: 1,
-		borderTopColor: '#e8eddf',
+		borderTopColor: '#cccccc',
 	},
 	backgroundImage: {
 		flex: 1,

@@ -33,10 +33,10 @@ export default function ProfileData() {
                     style={styles.image} 
                 />
                 <View style={styles.containerPersonalInfos}>
-                    <TextInput style={styles.name}>{student.displayname}</TextInput>
+                    <Text style={styles.name}>{student.displayname}</Text>
                     <View style={styles.containerMail}>
                         <Icon name="mail-outline" size={18} color="#faedcd"/>
-                        <TextInput style={styles.email}>{student.email}</TextInput>
+                        <Text style={styles.email}>{student.email}</Text>
                         
                     </View>
                 </View>
@@ -53,7 +53,7 @@ export default function ProfileData() {
                     </View>
                     <View style={styles.progressBarContainer}>
                         <View
-                            style={[styles.progressBar, { width: `${decimalPartLevel}%`, backgroundColor: `${colorCoalition.transparence}` }]} // Calcul de la largeur en fonction du niveau
+                            style={[styles.progressBar, { width: `${decimalPartLevel}%`, backgroundColor: "#faedcd" }]} // Calcul de la largeur en fonction du niveau
                         />
                     </View>
                 </View>
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     name: {
         flex: 2,
         fontSize: 26,
+        flexWrap: 'wrap',
     },
     email: {
         fontSize: 16,

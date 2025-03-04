@@ -24,9 +24,6 @@ export default function AppNavigator() {
                         <Stack.Screen name="HomeScreen" component={HomeScreen} />
                         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
                 </Stack.Navigator>
-				{/* {student && (
-					<BottomBar />
-				)} */}
             </NavigationContainer>
 
         </>

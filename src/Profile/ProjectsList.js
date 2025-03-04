@@ -5,20 +5,13 @@ import { screenHeight, screenWidth, apiClient } from '../Utils/constant';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function ProjectsList() {
-    const { student, colorCoalition } = useStudent();
+    const { student, colorCoalition, projects } = useStudent();
     const [loading, setLoading] = useState(true);
-    const [filteredProjects, setFilteredProjects] = useState([]);
     const [projectDetails, setProjectDetails] = useState({}); // Stocke les détails récupérés
 
     useEffect(() => {
         if (student) {
             setLoading(false);
-            const filtered = student.projects_users.filter(
-                item => item.marked === true && item.cursus_ids[0] === 21
-            );
-            console.log(filtered[0])
-            setFilteredProjects(filtered);
-            // fetchProjectDetails(filtered);
         }
     }, [student]);
 
@@ -98,7 +91,7 @@ export default function ProjectsList() {
     return (
         <View style={styles.container}>
             <FlatList
-                data={filteredProjects}
+                data={projects}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => (
                     <View style={styles.card}>

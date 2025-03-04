@@ -14,25 +14,22 @@ import { screenHeight, screenWidth, apiClient } from '../Utils/constant';
 import { useStudent } from '../Utils/studentContext';
 
 export default function SkillsList() {
-    const { student, colorCoalition } = useStudent();
+    const { student, colorCoalition, skills } = useStudent();
     const [loading, setLoading] = useState(true);
-    const [skills, setSkills] = useState([])
     const levelMax = useRef(0)
     const colorCard = useRef(colorCoalition.color);
-
-    console.log(colorCard.current);
+    
     const PercentageSizeLevel = (level, levelMax) => {
         let result = 0;
 
         level = Math.trunc(level) || 0; 
         result = (level * 100) / levelMax;
-        console.log(result);
         return result;
     }
 
     const getDarkerColor = (hexColor, level, maxLevel) => {
         // Calcul du pourcentage d'assombrissement (plus le niveau est haut, plus on assombrit)
-        const darkenAmount = Math.floor((+20* level) / maxLevel); // Ajuste l'intensité de l'effet
+        const darkenAmount = Math.floor((+30* level) / maxLevel); // Ajuste l'intensité de l'effet
     
         const lightenDarkenColor = (col, amt) => {
             let usePound = false;
@@ -57,22 +54,11 @@ export default function SkillsList() {
     };
     
     
-    
-    
     useEffect(() => {
             if (student) {
-                let nbrCursus = student.cursus_users.length - 1
                 setLoading(false);
-                if (student.cursus_users[nbrCursus]) {
-                    const skills = student.cursus_users[nbrCursus].skills;
-                    setSkills(skills);
-                    levelMax.current = Math.trunc(student.cursus_users[nbrCursus].skills[0].level) || 0;
-                }
-                else
-                    setSkills([]);
-                console.log(colorCoalition);
-                colorCard.current = colorCoalition.color;
-                
+                if (skills.length > 0)
+                    levelMax.current = Math.trunc(skills[0].level)
             }
     }, [student]);
 
@@ -116,24 +102,22 @@ export default function SkillsList() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
-    },
-    cardSkill: {
-        flexDirection: 'row',
-        marginBottom: 20,
     },
     infosSkill: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: 15,
         paddingRight: 15,
-        alignItems: 'center'
+        alignItems: 'center',
+        alignSelf: 'center'
     },
     level: {
         fontSize: 26,
     },
     nameSkill: {
         flexWrap: 'wrap',
+        fontSize: 16,
+        flex: 2,
     },
     levelProgressContainer: {
         flexDirection: 'column',
@@ -141,18 +125,20 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         marginLeft: 5,
         marginBottom: 15,
+        paddingLeft: 10,
+        paddingRight: 10,
     },
     progressBarContainer: {
-        height: 40,
+        height: 48,
         borderRadius: 5,
         overflow: 'hidden',
     },
     progressBar: {
         height: '100%',
         backgroundColor: '#274c77',
-        borderRadius: 5,
         borderEndEndRadius: 20,
         borderTopRightRadius: 20,
+        justifyContent: 'center',
     },
     emptySkills: {
         textAlign: 'center',

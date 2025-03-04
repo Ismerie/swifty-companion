@@ -5,13 +5,12 @@ const CLIENT_SECRET = 's-s4t2ud-62409cafc37ff7ec1e8b7076171f4a662910eddbbb13159c
 
 const TOKEN_URL = 'https://api.intra.42.fr/oauth/token';
 
-// Variables globales pour stocker le token et son expiration
 let accessToken = null;
 let tokenExpiration = null;
 
 const getAccessToken = async () => {
 
-    // Vérifier si le token est encore valide
+
     if (accessToken && tokenExpiration && new Date() < tokenExpiration) {
         console.log("Token encore valide, réutilisation.");
         return accessToken;

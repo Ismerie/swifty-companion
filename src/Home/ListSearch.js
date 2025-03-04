@@ -11,8 +11,10 @@ import { useNavigation } from '@react-navigation/native';
 import { useStudent } from '../Utils/studentContext';
 import { apiClient, screenHeight } from '../Utils/constant';
 
+import request from '../Utils/request';
+
 export default function ListSearch({listStudents, lengthSearch}) {
-    const { setStudent, setColorCoalition } = useStudent();
+    const { setStudent, setColorCoalition, setProjects, setSkills } = useStudent();
     const navigation = useNavigation();
     const [isKeyboardVisible, setKeyboardVisible] = useState(true);
     
@@ -36,46 +38,49 @@ export default function ListSearch({listStudents, lengthSearch}) {
         }
         
 
-    const handleSelectStudent = async (id) => {
-        try {
-            const res = await apiClient.get(`/users/${id}`);
-            if (res.status != "200") throw new Error('Error API 42');
-            if (res.data) {
-                setStudent(res.data)
+        const handleSelectStudent = async (id) => {
+            try {
+                const dataProfileStudent = await request.getProfileStudent(id); // Attendre la réponse
+        
+                if (dataProfileStudent.success) {
+                    setStudent(dataProfileStudent.data);
+                } 
+                else 
+                    throw new Error('Error API 42')
+
+                const filteredProjects = dataProfileStudent.data.projects_users.filter(
+                    item => item.marked === true && item.cursus_ids[0] === 21
+                );
+                setProjects(filteredProjects);
+
+                for (let i = 0; i < dataProfileStudent.data.cursus_users.length; i++) {
+                    if (dataProfileStudent.data.cursus_users[i].cursus_id === 21) {
+                        console.log(dataProfileStudent.data.cursus_users[i].skills);
+                        setSkills(dataProfileStudent.data.cursus_users[i].skills);
+                    }
+                }
+
+                const dataColor = await request.getColorCoalitionStudent(id); // Attendre la réponse
+                if (dataColor.success && dataColor.data) {
+                    setColorCoalition({
+                        transparence: addTransparencyToHex(dataColor.data, 0.2),
+                        color: dataColor.data
+                    });
+                } 
+                else if (!dataColor.success) 
+                    throw new Error('Error API 42')
+        
+                navigation.navigate('ProfileScreen');
+            } catch (error) {
+                console.error("Error in handleSelectStudent:", error);
+                Toast.show({
+                    type: ALERT_TYPE.DANGER,
+                    title: 'Error',
+                    textBody: 'An unexpected error occurred. Please try again later.',
+                });
             }
-        }
-        catch (error) {
-            console.log(error)
-            Toast.show({
-                type: ALERT_TYPE.DANGER,
-                title: 'Error',
-                textBody: 'Error connecting to API 42. Retry later.',
-            });
-            return ;
-            
-        }
-        try {
-            const res = await apiClient.get(`/users/${id}/coalitions`);
-            if (res.status !== 200) throw new Error('Error API 42');
-            if (res.data) {
-                console.log(res.data[0]);
-                setColorCoalition({
-                    tranparence: addTransparencyToHex(res.data[0].color, 0.2),
-                    color: res.data[0].color
-                })
-                
-            }
-        } catch (error) {
-            console.log(error);
-            Toast.show({
-                type: ALERT_TYPE.DANGER,
-                title: 'Error',
-                textBody: 'Error connecting to API 42. Retry later.',
-            });
-            return ;
-        }
-        navigation.navigate('ProfileScreen');
-    }
+        };
+        
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
