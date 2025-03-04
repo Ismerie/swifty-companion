@@ -90,6 +90,7 @@ export default function ProjectsList() {
 
     return (
         <View style={styles.container}>
+        {projects.length > 0 ? (
             <FlatList
                 data={projects}
                 keyExtractor={item => item.id.toString()}
@@ -114,6 +115,9 @@ export default function ProjectsList() {
                     </View>
                 )}
             />
+        ):(
+            <Text style={styles.emptyProjects}>No projects yet</Text>
+        )}
         </View>
     );
 }
@@ -164,4 +168,8 @@ const styles = StyleSheet.create({
     },
     timeProject: {
     },
+    emptyProjects: {
+        textAlign: 'center',
+        fontSize: 24,
+    }
 });

@@ -7,20 +7,29 @@ import { TextInput } from 'react-native-gesture-handler';
 export default function ProfileData() {
     const { student, colorCoalition } = useStudent();
     const [loading, setLoading] = useState(true);
+    const [levelTrunc, setLevelTrunc] = useState(0);
+    const [decimalPartLevel, setDecimalPartLevel] = useState(0);
 
+        
     useEffect(() => {
+        let totalLevel = 0
         if (student) {
+            for (let i = 0; i < student.cursus_users.length; i++) {
+                if (student.cursus_users[i].cursus_id === 21) {
+                    totalLevel = student.cursus_users[i].level
+                    break ;
+                }
+            }
+            setLevelTrunc(Math.trunc(totalLevel) || 0); 
+            setDecimalPartLevel(Math.trunc(((totalLevel - Math.trunc(totalLevel)) * 100)));
             setLoading(false);
         }
     }, [student]);
-
+    
     if (loading) {
         return <Text>Chargement des données...</Text>;
     }
-
-    const totalLevel = student?.cursus_users?.[1]?.level || 0
-    const levelTrunc = Math.trunc(totalLevel) || 0; 
-    const decimalPartLevel = Math.trunc(((totalLevel - levelTrunc) * 100));
+    
 
     return (
         <>

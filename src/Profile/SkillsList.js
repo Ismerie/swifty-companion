@@ -114,11 +114,6 @@ const styles = StyleSheet.create({
     level: {
         fontSize: 26,
     },
-    nameSkill: {
-        flexWrap: 'wrap',
-        fontSize: 16,
-        flex: 2,
-    },
     levelProgressContainer: {
         flexDirection: 'column',
         flex: 1,
@@ -129,16 +124,27 @@ const styles = StyleSheet.create({
         paddingRight: 10,
     },
     progressBarContainer: {
-        height: 48,
+        minHeight: 48,  // Hauteur minimale
         borderRadius: 5,
         overflow: 'hidden',
+        justifyContent: 'center',
     },
     progressBar: {
-        height: '100%',
+        minHeight: 48,  // Hauteur minimale ajustable
+        paddingVertical: 5, // Ajoute un peu d'espace pour le texte
         backgroundColor: '#274c77',
         borderEndEndRadius: 20,
         borderTopRightRadius: 20,
         justifyContent: 'center',
+        alignItems: 'center', // Centre le texte
+    },
+    nameSkill: {
+        flexWrap: 'wrap',
+        fontSize: 16,
+        flex: 2,
+        textAlign: 'center',  // Centre le texte
+        paddingHorizontal: 5,  // Ajoute de l'espace pour éviter le crop
+        numberOfLines: 2,  // Permet d'afficher deux lignes max
     },
     emptySkills: {
         textAlign: 'center',

@@ -23,45 +23,6 @@ import SkillsList from './Profile/SkillsList';
 export default function ProfileScreen() {
 	const { student, setStudent, colorCoalition ,setColorCoalition } = useStudent();
 	const Tab = createMaterialTopTabNavigator();
-	console.log(colorCoalition);
-
-	
-
-	useEffect(() => {
-		// const fetchData = async () => {
-		// 	try {
-		// 		const res = await apiClient.get(`/users/96778`);
-		// 		if (res.status !== 200) throw new Error('Error API 42');
-		// 		if (res.data) {
-		// 			setStudent(res.data);
-		// 			// console.log(res.data);
-		// 		}
-		// 	} catch (error) {
-		// 		console.log(error);
-		// 	}
-		// };
-
-		// const fetchCoallition = async () => {
-		// 	try {
-		// 		const res = await apiClient.get(`/users/96778/coalitions`);
-		// 		if (res.status !== 200) throw new Error('Error API 42');
-		// 		if (res) {
-		// 			console.log(res.data[0]);
-		// 			setColorCoalition({
-		// 				tranparence: addTransparencyToHex(res.data[0].color, 0.2),
-		// 				color: res.data[0].color
-		// 			})
-					
-		// 		}
-		// 	} catch (error) {
-		// 		console.log(error);
-		// 	}
-		// };
-	
-		// fetchData();
-		// fetchCoallition();
-	}, []);
-	
 
 	return (
 			<AlertNotificationRoot>
@@ -72,7 +33,7 @@ export default function ProfileScreen() {
 				>
 					<SafeAreaView 
 						key={colorCoalition} 
-						style={[styles.container, { backgroundColor: colorCoalition.tranparence}]}>
+						style={[styles.container, { backgroundColor: colorCoalition.transparence}]}>
 
 						<StatusBar backgroundColor="transparent" barStyle="dark-content" translucent={true} />
 						<View style={{padding: screenWidth * 0.05}}>

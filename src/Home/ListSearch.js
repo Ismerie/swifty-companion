@@ -55,8 +55,11 @@ export default function ListSearch({listStudents, lengthSearch}) {
 
                 for (let i = 0; i < dataProfileStudent.data.cursus_users.length; i++) {
                     if (dataProfileStudent.data.cursus_users[i].cursus_id === 21) {
-                        console.log(dataProfileStudent.data.cursus_users[i].skills);
                         setSkills(dataProfileStudent.data.cursus_users[i].skills);
+                        break
+                    }
+                    else if (i + 1 === dataProfileStudent.data.cursus_users.length) {
+                        setSkills([]);
                     }
                 }
 
@@ -67,7 +70,13 @@ export default function ListSearch({listStudents, lengthSearch}) {
                         color: dataColor.data
                     });
                 } 
-                else if (!dataColor.success) 
+                else if (dataColor.success) {
+                    setColorCoalition({
+                        transparence: "#FFFFFF33",
+                        color: "#FFFFFF"
+                    });
+                }
+                else
                     throw new Error('Error API 42')
         
                 navigation.navigate('ProfileScreen');
