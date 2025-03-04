@@ -13,7 +13,7 @@ import { apiClient, screenHeight } from '../Utils/constant';
 
 import request from '../Utils/request';
 
-export default function ListSearch({listStudents, lengthSearch}) {
+export default function ListSearch({listStudents, lengthSearch, setLoading}) {
     const { setStudent, setColorCoalition, setProjects, setSkills } = useStudent();
     const navigation = useNavigation();
     const [isKeyboardVisible, setKeyboardVisible] = useState(true);
@@ -39,6 +39,7 @@ export default function ListSearch({listStudents, lengthSearch}) {
         
 
         const handleSelectStudent = async (id) => {
+            setLoading(true);
             try {
                 const dataProfileStudent = await request.getProfileStudent(id); // Attendre la réponse
         

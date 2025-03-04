@@ -3,6 +3,7 @@ import { StyleSheet,
     View,
     TextInput,
     Keyboard,
+    ActivityIndicator,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
@@ -13,6 +14,7 @@ import { apiClient, screenWidth } from '../Utils/constant';
 export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [inputText, setInputText] = useState('');
     const [suggestionsStudents, setSuggestionsStudents] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     function handleSearch(text) {
         Keyboard.dismiss();
@@ -86,9 +88,12 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                 />
+                {loading && (
+                    <ActivityIndicator style={styles.loader} size="small" color="gray"/>
+                )}
             </View>
             {suggestionsStudents.length > 0 && inputIsFocused && (
-                <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length}/>
+                <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length} setLoading={setLoading}/>
             )}
         </>
     );
@@ -111,10 +116,13 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         fontSize: 16,
         color: 'black',
-        width: '90%'
+        width: '90%',
     },
     inputWidthList: {
         borderBottomLeftRadius: 0,
         borderBottomRightRadius: 0,
+    },
+    loader: {
+        flex : 1,
     }
 });

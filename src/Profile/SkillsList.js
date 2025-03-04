@@ -15,7 +15,6 @@ import { useStudent } from '../Utils/studentContext';
 
 export default function SkillsList() {
     const { student, colorCoalition, skills } = useStudent();
-    const [loading, setLoading] = useState(true);
     const levelMax = useRef(0)
     const colorCard = useRef(colorCoalition.color);
     
@@ -56,7 +55,6 @@ export default function SkillsList() {
     
     useEffect(() => {
             if (student) {
-                setLoading(false);
                 if (skills.length > 0)
                     levelMax.current = Math.trunc(skills[0].level)
             }
@@ -149,5 +147,5 @@ const styles = StyleSheet.create({
     emptySkills: {
         textAlign: 'center',
         fontSize: 24,
-    }
+    },
 });

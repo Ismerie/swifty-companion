@@ -6,14 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function ProjectsList() {
     const { student, colorCoalition, projects } = useStudent();
-    const [loading, setLoading] = useState(true);
-    const [projectDetails, setProjectDetails] = useState({}); // Stocke les détails récupérés
-
-    useEffect(() => {
-        if (student) {
-            setLoading(false);
-        }
-    }, [student]);
+    const [projectDetails, setProjectDetails] = useState({}); // Stocke les détails récupérés 
 
     const fetchProjectDetails = async (projects) => {
         const details = {};
@@ -42,10 +35,6 @@ export default function ProjectsList() {
         if (projectDetails[projectId].solo) return "person-outline";
         return "people-outline";
     };
-
-    if (loading) {
-        return <Text>Chargement des données...</Text>;
-    }
 
     const calculateElapsedTime = (apiDate) => {
         if (!apiDate) return "Date inconnue";
