@@ -160,5 +160,6 @@ const styles = StyleSheet.create({
     emptyProjects: {
         textAlign: 'center',
         fontSize: 24,
+        color: '#faedcd',
     }
 });

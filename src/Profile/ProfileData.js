@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     containerPersonalInfos: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'start',
+        alignItems: 'flex-start',
         paddingLeft: 10,
     },
     containerMail: {
@@ -85,9 +85,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     name: {
-        flex: 2,
         fontSize: 26,
         flexWrap: 'wrap',
+        marginBottom: 5,
     },
     email: {
         fontSize: 16,

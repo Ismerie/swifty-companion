@@ -29,15 +29,12 @@ export default function ProfileScreen({ route }) {
 	const Tab = createMaterialTopTabNavigator();
 	const [loading, setLoading] = useState(true);
 	const navigation = useNavigation();
-	const { studentId } = route.params; // Tu peux utiliser le paramètre ici
-
-	console.log("ttttttttttt")
-	console.log(studentId)
+	const { studentId } = route.params;
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const dataProfileStudent = await request.getProfileStudent(studentId); // Attendre la réponse
+				const dataProfileStudent = await request.getProfileStudent(studentId); 
 	
 				if (dataProfileStudent.success) {
 					setStudent(dataProfileStudent.data);
@@ -59,7 +56,7 @@ export default function ProfileScreen({ route }) {
 					}
 				}
 	
-				const dataColor = await request.getColorCoalitionStudent(studentId); // Attendre la réponse
+				const dataColor = await request.getColorCoalitionStudent(studentId);
 				if (dataColor.success && dataColor.data) {
 					setColorCoalition({
 						transparence: addTransparencyToHex(dataColor.data, 0.2),
@@ -97,7 +94,7 @@ export default function ProfileScreen({ route }) {
 				>
 					<SafeAreaView 
 						key={colorCoalition} 
-						style={[styles.container, { backgroundColor: colorCoalition.transparence}]}>
+						style={[styles.container, { backgroundColor: loading ? 'transparence' : colorCoalition.transparence}]}>
 
 						<StatusBar backgroundColor="transparent" barStyle="dark-content" translucent={true} />
 						{loading ? (

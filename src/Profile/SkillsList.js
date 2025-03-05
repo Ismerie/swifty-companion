@@ -28,7 +28,7 @@ export default function SkillsList() {
 
     const getDarkerColor = (hexColor, level, maxLevel) => {
         // Calcul du pourcentage d'assombrissement (plus le niveau est haut, plus on assombrit)
-        const darkenAmount = Math.floor((+30* level) / maxLevel); // Ajuste l'intensité de l'effet
+        const darkenAmount = Math.floor((+40 * level) / maxLevel); // Ajuste l'intensité de l'effet
     
         const lightenDarkenColor = (col, amt) => {
             let usePound = false;
@@ -147,5 +147,6 @@ const styles = StyleSheet.create({
     emptySkills: {
         textAlign: 'center',
         fontSize: 24,
+        color: '#faedcd'
     },
 });
