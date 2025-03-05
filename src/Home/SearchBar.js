@@ -9,12 +9,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 import ListSearch from './ListSearch';
-import { apiClient, screenWidth } from '../Utils/constant';
+import { apiClient, screenWidth, screenHeight } from '../Utils/constant';
 
 export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [inputText, setInputText] = useState('');
     const [suggestionsStudents, setSuggestionsStudents] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [isKeyboardVisible, setKeyboardVisible] = useState(true)
 
     function handleSearch(text) {
         Keyboard.dismiss();
@@ -61,23 +62,37 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
             });
             
         }
+        setLoading(false);
     }
 
     useEffect(() => {
         const delaySearch = setTimeout(() => {
             if (inputText.length >= 3) {
+                setLoading(true);
                 getSuggestionsStudents(inputText);
             } else {
                 setSuggestionsStudents([]);
             }
-        }, 300); // Attente de 300ms avant d'envoyer la requête
-        
-        return () => clearTimeout(delaySearch);
+        }, 500); // Attente de 300ms avant d'envoyer la requête
+
+        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
+            setKeyboardVisible(true);
+        });
+        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
+            setKeyboardVisible(false);
+        });
+
+        return () => {
+            clearTimeout(delaySearch)
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
+    
     }, [inputText]);
     
     return (
         <>
-            <View style={[styles.inputContainer, suggestionsStudents.length > 0 && inputIsFocused ? styles.inputWidthList : null]}>
+            <View style={[styles.inputContainer, suggestionsStudents.length > 0 && inputIsFocused ? styles.inputWidthList : null, {marginTop: screenHeight * 0.25}]}>
                 <Icon name="search-outline" size={24} color="#D6D6D6" />
                 <TextInput
                     style={styles.input}
@@ -93,7 +108,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                 )}
             </View>
             {suggestionsStudents.length > 0 && inputIsFocused && (
-                <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length} setLoading={setLoading}/>
+                <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length}/>
             )}
         </>
     );

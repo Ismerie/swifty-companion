@@ -47,15 +47,6 @@ export default function ProfileScreen({ route }) {
 				);
 				setProjects(filteredProjects);
 	
-				for (let i = 0; i < dataProfileStudent.data.cursus_users.length; i++) {
-					if (dataProfileStudent.data.cursus_users[i].cursus_id === 21) {
-						setSkills(dataProfileStudent.data.cursus_users[i].skills);
-						break;
-					} else if (i + 1 === dataProfileStudent.data.cursus_users.length) {
-						setSkills([]);
-					}
-				}
-	
 				const dataColor = await request.getColorCoalitionStudent(studentId);
 				if (dataColor.success && dataColor.data) {
 					setColorCoalition({
@@ -67,8 +58,20 @@ export default function ProfileScreen({ route }) {
 						transparence: "#FFFFFF33",
 						color: "#FFFFFF"
 					});
+
+					
+					
 				} else {
 					throw new Error('Error API 42');
+				}
+				setLoading(false)	
+				for (let i = 0; i < dataProfileStudent.data.cursus_users.length; i++) {
+					if (dataProfileStudent.data.cursus_users[i].cursus_id === 21) {
+						setSkills(dataProfileStudent.data.cursus_users[i].skills);
+						break;
+					} else if (i + 1 === dataProfileStudent.data.cursus_users.length) {
+						setSkills([]);
+					}
 				}
 
 			} catch (error) {
@@ -79,7 +82,6 @@ export default function ProfileScreen({ route }) {
 					textBody: 'An unexpected error occurred. Please try again later.',
 				});
 			}
-			setLoading(false)
 		};
 		fetchData();
 	}, []);

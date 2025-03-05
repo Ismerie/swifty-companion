@@ -18,7 +18,7 @@ export default function HomeScreen() {
     const logoOpacity = useRef(new Animated.Value(1)).current;
     const translateY = useRef(new Animated.Value(0)).current;
     const [inputIsFocused, setInputIsFocused] = useState(false);
-    const { setStudent,setColorCoalition, setProjects, setSkills } = useStudent();
+
 
     function handleFocus() {
         setInputIsFocused(true);
@@ -53,16 +53,6 @@ export default function HomeScreen() {
             Keyboard.dismiss();
         }
         
-    // useEffect(() => {
-    //     setStudent(null);
-    //     setSkills(null);
-    //     setProjects(null);
-    //     setColorCoalition({
-    //         transparence: "#FFFFFF33",
-    //         color: "#FFFFFF"
-    //     });
-    // }, [])
-
     return (
         <AlertNotificationRoot>        
             <ImageBackground
@@ -70,31 +60,23 @@ export default function HomeScreen() {
                 style={styles.backgroundImage}
                 resizeMode="cover"
             >
-                    <TouchableWithoutFeedback onPress={handleBlur} accessible={false}>
-                <SafeAreaView style={styles.container}>
+                <TouchableWithoutFeedback onPress={handleBlur} accessible={false}>
+                    <SafeAreaView style={styles.container}>
                         <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }]}]}>
-                        <Animated.Image 
-                            source={require('../assets/42logo.png')}
-                            style={[styles.logo, { opacity: logoOpacity }]}
-                        />
-                        <View style={{
-                            alignItems: 'center',
-                            justifyContent: 'end',
-                            width: '100%',
-                        }}>
-                            <SearchBar handleBlur={handleBlur} handleFocus={handleFocus} inputIsFocused={inputIsFocused}/>
-                            {/* <View style={{
-                                position: "absolute",
-                                bottom: -screenWidth / 7.2,
+                            <Animated.Image 
+                                source={require('../assets/42logo.png')}
+                                style={[styles.logo, { opacity: logoOpacity, display: inputIsFocused ? 'none' : 'flex' }]}
+                            />
+                            <View style={{
                                 alignItems: 'center',
-                                justifyContent: 'center',
+                                justifyContent: 'end',
                                 width: '100%',
                             }}>
-                            </View> */}
-                        </View>
-                    </Animated.View>
-                </SafeAreaView>
-                    </TouchableWithoutFeedback>
+                                <SearchBar handleBlur={handleBlur} handleFocus={handleFocus} inputIsFocused={inputIsFocused}/>
+                            </View>
+                        </Animated.View>
+                    </SafeAreaView>
+                </TouchableWithoutFeedback>
             </ImageBackground>
         </AlertNotificationRoot>
     );
@@ -119,7 +101,10 @@ export default function HomeScreen() {
     logo: {
         height: screenWidth / 2.88,
         width: screenWidth / 2.88,
-        marginBottom: spacing,
+        backgroundColor: 'pink',
     },
+    containerSearchBar: {
+        
+    }
     });
     
