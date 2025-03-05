@@ -92,7 +92,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     
     return (
         <>
-            <View style={[styles.inputContainer, suggestionsStudents.length > 0 && inputIsFocused ? styles.inputWidthList : null, {marginTop: screenHeight * 0.25}]}>
+            <View style={[styles.inputContainer, suggestionsStudents.length > 0 && inputIsFocused ? styles.inputWidthList : null]}>
                 <Icon name="search-outline" size={24} color="#D6D6D6" />
                 <TextInput
                     style={styles.input}

@@ -3,6 +3,7 @@ import { SafeAreaView, Text, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useStudent } from './Utils/studentContext';
+import { StatusBar } from 'expo-status-bar';
 
 import HomeScreen from './HomeScreen';
 import ProfileScreen from './ProfileScreen';
@@ -14,6 +15,7 @@ export default function AppNavigator() {
 
 	return (
 		<>
+            <StatusBar hidden={true}/>
             <NavigationContainer styles={styles.container}>
                 <Stack.Navigator
                     initialRouteName={student ? "ProfileScreen" : "HomeScreen"}

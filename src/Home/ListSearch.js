@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 10,
-        backgroundColor: 'pink'
     },
     image: {
         width: 70,

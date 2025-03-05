@@ -101,7 +101,6 @@ export default function HomeScreen() {
     logo: {
         height: screenWidth / 2.88,
         width: screenWidth / 2.88,
-        backgroundColor: 'pink',
     },
     containerSearchBar: {
         
