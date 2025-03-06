@@ -15,7 +15,8 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [inputText, setInputText] = useState('');
     const [suggestionsStudents, setSuggestionsStudents] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [isKeyboardVisible, setKeyboardVisible] = useState(true)
+    const [isKeyboardVisible, setKeyboardVisible] = useState(true);
+    const [lengthSearch, setLenghtSearch] = useState(0)
 
     function handleSearch(text) {
         Keyboard.dismiss();
@@ -30,7 +31,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
         try {
             const res = await apiClient.get('/users', {
                 params: {
-                    'range[login]': `${searchStudent.toLowerCase()},${searchStudent.toLowerCase()}z`
+                    'range[login]': `${searchStudent.toLowerCase()},${searchStudent.toLowerCase()}zzz`
                 }
             });
             if (res.status != "200") throw new Error('Error API 42');
@@ -43,6 +44,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                     image: user.image?.versions?.small || null
                 }))
                 setSuggestionsStudents(suggestions);
+                setLenghtSearch(inputText.replace(/[ .]/g, "").length);
             }
             else if (res.data.length === 0) {
                 Toast.show({
@@ -51,6 +53,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                     textBody: 'No student found.',
                 });
                 setSuggestionsStudents([]);
+                setLenghtSearch(0);
             }
         }
         catch (error) {
@@ -69,9 +72,10 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
         const delaySearch = setTimeout(() => {
             if (inputText.length >= 3) {
                 setLoading(true);
-                getSuggestionsStudents(inputText);
+                getSuggestionsStudents(inputText.replace(/[ .]/g, ""));
             } else {
                 setSuggestionsStudents([]);
+                setLenghtSearch(0);
             }
         }, 500); // Attente de 500ms avant d'envoyer la requête
 
@@ -108,7 +112,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                 )}
             </View>
             {suggestionsStudents.length > 0 && inputIsFocused && (
-                <ListSearch listStudents={suggestionsStudents} lengthSearch={inputText.length}/>
+                <ListSearch listStudents={suggestionsStudents} lengthSearch={lengthSearch}/>
             )}
         </>
     );
