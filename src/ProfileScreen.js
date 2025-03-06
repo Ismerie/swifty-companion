@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet,
-	Text,
 	View,
-	TextInput,
 	SafeAreaView,
 	StatusBar,
 	ImageBackground,
@@ -12,7 +10,7 @@ import { useRoute } from '@react-navigation/native';
 import { useStudent } from './Utils/studentContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
-import { screenHeight, screenWidth, apiClient } from './Utils/constant';
+import { screenWidth} from './Utils/constant';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useNavigation } from '@react-navigation/native';
 
@@ -81,6 +79,7 @@ export default function ProfileScreen({ route }) {
 					title: 'Error',
 					textBody: 'An unexpected error occurred. Please try again later.',
 				});
+				navigation.navigate('HomeScreen');
 			}
 		};
 		fetchData();
@@ -101,8 +100,7 @@ export default function ProfileScreen({ route }) {
 						<StatusBar backgroundColor="transparent" barStyle="dark-content" translucent={true} />
 						{loading ? (
 							<View style={styles.loadingContainer}>
-								<ActivityIndicator size="large" color="gray" />
-							<Text style={styles.loadingText}>Chargement...</Text>
+								<ActivityIndicator size="large" color="#333533" />
 						</View>
 						):(
 							<>

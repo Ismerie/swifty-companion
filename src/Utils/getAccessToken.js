@@ -1,16 +1,11 @@
+import { CLIENT_ID, CLIENT_SECRET} from '@env';
 import axios from 'axios';
 
-const CLIENT_ID = 'u-s4t2ud-e47acc752052c4fa979c83d900fb10f7ce2d36614ef79c3b783a36d99078f901';
-const CLIENT_SECRET = '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';
-
-const TOKEN_URL = 'https://api.intra.42.fr/oauth/token';
-
+const TOKEN_URL = "https://api.intra.42.fr/oauth/token"
 let accessToken = null;
 let tokenExpiration = null;
 
 const getAccessToken = async () => {
-
-
     if (accessToken && tokenExpiration && new Date() < tokenExpiration) {
         console.log("Token encore valide, réutilisation.");
         return accessToken;
@@ -25,7 +20,7 @@ const getAccessToken = async () => {
         });
 
         accessToken = response.data.access_token;
-        tokenExpiration = new Date(Date.now() + response.data.expires_in * 1000); // Conversion en millisecondes
+        tokenExpiration = new Date(Date.now() + response.data.expires_in * 1000);
 
         return accessToken;
     } catch (error) {

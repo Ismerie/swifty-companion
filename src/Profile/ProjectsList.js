@@ -97,8 +97,10 @@ export default function ProjectsList() {
                         </View>
                         <View style={styles.markContainer}>
                             <Text style={styles.mark}>{item.final_mark}</Text>
-                            {(item["validated?"] === false) && (
-                                <Icon name="close-outline" size={24} color="red" style={styles.iconMark}/>
+                            {(item["validated?"] === false) ? (
+                                <Icon name="close-outline" size={24} color="#9e2a2b" style={styles.iconMark}/>
+                            ):(
+                                <Icon name="checkmark-outline" size={24} color="#6a994e" style={styles.iconMark}/>
                             )}
                         </View>
                     </View>

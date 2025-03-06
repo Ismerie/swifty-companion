@@ -9,15 +9,14 @@ import { screenHeight, screenWidth, apiClient } from '../Utils/constant';
 import { useStudent } from '../Utils/studentContext';
 
 export default function SkillsList() {
-    const { student, colorCoalition, skills } = useStudent();
-    const levelMax = useRef(0)
-    const colorCard = useRef(colorCoalition.transparence);
+    const { student, skills } = useStudent();
+    const [levelMax, setLevelMax] = useState(0);
     
-    const PercentageSizeLevel = (level, levelMax) => {
+    const PercentageSizeLevel = (level, maxLevel) => {
         let result = 0;
 
         level = Math.trunc(level) || 0; 
-        result = (level * 100) / levelMax;
+        result = (level * 100) / maxLevel;
         return result;
     }
 
@@ -51,9 +50,9 @@ export default function SkillsList() {
     useEffect(() => {
             if (student) {
                 if (skills.length > 0)
-                    levelMax.current = Math.trunc(skills[0].level)
+                    setLevelMax(Math.trunc(skills[0].level));
             }
-    }, [student]);
+    }, [student, skills]);
 
     return (
         <View style={styles.container}>
@@ -69,8 +68,8 @@ export default function SkillsList() {
                                 style={[
                                     styles.progressBar,
                                     { 
-                                        width: `${PercentageSizeLevel(item.level, levelMax.current)}%`, 
-                                        backgroundColor: getDarkerColor("#faedcd", item.level, levelMax.current) 
+                                        width: `${PercentageSizeLevel(item.level, levelMax)}%`, 
+                                        backgroundColor: getDarkerColor("#faedcd", item.level, levelMax) 
                                     }
                                 ]}
                             >
@@ -86,11 +85,10 @@ export default function SkillsList() {
                                                 styles.containerDecimalBar,
                                                 { 
                                                     width: `${Math.trunc(((item.level - Math.trunc(item.level)) * 100))}%`,
-                                                    backgroundColor: getDarkerColor("#46494c", item.level, levelMax.current)
+                                                    backgroundColor: getDarkerColor("#46494c", item.level, levelMax)
                                                 }
                                             ]}>
                                         </View>
-                                        {/* <Text>{Math.trunc(((item.level - Math.trunc(item.level)) * 100))}%</Text> */}
                                     </View>
                                 </View>
                             </View>
