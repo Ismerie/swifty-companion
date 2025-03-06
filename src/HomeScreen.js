@@ -18,7 +18,6 @@ export default function HomeScreen() {
     const translateY = useRef(new Animated.Value(0)).current;
     const [inputIsFocused, setInputIsFocused] = useState(false);
 
-
     function handleFocus() {
         setInputIsFocused(true);
         Animated.parallel([

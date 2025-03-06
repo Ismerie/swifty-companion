@@ -11,12 +11,21 @@ import { useStudent } from '../Utils/studentContext';
 export default function SkillsList() {
     const { student, skills } = useStudent();
     const [levelMax, setLevelMax] = useState(0);
+    let levelMin = 0;
     
     const PercentageSizeLevel = (level, maxLevel) => {
         let result = 0;
-
+    
         level = Math.trunc(level) || 0; 
         result = (level * 100) / maxLevel;
+
+        if (levelMin === 0  || level < levelMin && level != 0)
+            levelMin = level;
+
+        if (level === 0) {
+            return result = (levelMin * 100) / maxLevel;
+        }
+        
         return result;
     }
 
@@ -75,7 +84,6 @@ export default function SkillsList() {
                             >
                                 <View style={styles.infosSkill}>
                                     <View style={styles.containerNameAndLevel}>
-                                        <Text style={styles.decimalPart}>{Math.trunc(((item.level - Math.trunc(item.level)) * 100))}%</Text>
                                         <Text style={styles.nameSkill}>{item.name}</Text>
                                         <Text style={styles.level}>{Math.trunc(item.level)}</Text>
                                     </View>
@@ -134,13 +142,11 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 0,
     },
     nameSkill: {
         flexWrap: 'wrap',
-        fontSize: 16,
+        fontSize: 14,
         flex: 2,
-        textAlign: 'center',
         paddingHorizontal: 5,
         numberOfLines: 2, 
     },
@@ -153,8 +159,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingLeft: 15,
-        paddingRight: 15,
+        paddingLeft: 5,
+        paddingRight: 10,
         alignItems: 'center',
         alignSelf: 'center'
     },
