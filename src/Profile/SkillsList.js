@@ -2,21 +2,16 @@ import React, { useEffect, useState, useRef } from 'react';
 import { StyleSheet,
     Text,
     View,
-    TextInput,
-    SafeAreaView,
-    StatusBar,
     FlatList,
 } from 'react-native';
 
-import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { screenHeight, screenWidth, apiClient } from '../Utils/constant';
 import { useStudent } from '../Utils/studentContext';
 
 export default function SkillsList() {
     const { student, colorCoalition, skills } = useStudent();
     const levelMax = useRef(0)
-    const colorCard = useRef(colorCoalition.color);
+    const colorCard = useRef(colorCoalition.transparence);
     
     const PercentageSizeLevel = (level, levelMax) => {
         let result = 0;
@@ -80,8 +75,23 @@ export default function SkillsList() {
                                 ]}
                             >
                                 <View style={styles.infosSkill}>
-                                    <Text style={styles.nameSkill}>{item.name}</Text>
-                                    <Text style={styles.level}>{Math.trunc(item.level)}</Text>
+                                    <View style={styles.containerNameAndLevel}>
+                                        <Text style={styles.decimalPart}>{Math.trunc(((item.level - Math.trunc(item.level)) * 100))}%</Text>
+                                        <Text style={styles.nameSkill}>{item.name}</Text>
+                                        <Text style={styles.level}>{Math.trunc(item.level)}</Text>
+                                    </View>
+                                    <View style={styles.containerPoucentageAndBar}>
+                                        <View 
+                                            style={[
+                                                styles.containerDecimalBar,
+                                                { 
+                                                    width: `${Math.trunc(((item.level - Math.trunc(item.level)) * 100))}%`,
+                                                    backgroundColor: getDarkerColor("#46494c", item.level, levelMax.current)
+                                                }
+                                            ]}>
+                                        </View>
+                                        {/* <Text>{Math.trunc(((item.level - Math.trunc(item.level)) * 100))}%</Text> */}
+                                    </View>
                                 </View>
                             </View>
 
@@ -101,14 +111,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    infosSkill: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingLeft: 15,
-        paddingRight: 15,
-        alignItems: 'center',
-        alignSelf: 'center'
-    },
     level: {
         fontSize: 26,
     },
@@ -123,18 +125,18 @@ const styles = StyleSheet.create({
     },
     progressBarContainer: {
         minHeight: 48,
-        borderRadius: 5,
         overflow: 'hidden',
         justifyContent: 'center',
     },
     progressBar: {
         minHeight: 48,
-        paddingVertical: 5,
+        paddingTop: 5,
         backgroundColor: '#274c77',
         borderEndEndRadius: 20,
         borderTopRightRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
+        borderWidth: 0,
     },
     nameSkill: {
         flexWrap: 'wrap',
@@ -149,4 +151,31 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: '#faedcd'
     },
+    containerNameAndLevel: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingLeft: 15,
+        paddingRight: 15,
+        alignItems: 'center',
+        alignSelf: 'center'
+    },
+    containerDecimalBar: {
+        minHeight: 5,
+        maxHeight: 5,
+        backgroundColor: '#bb9457',
+        borderEndEndRadius: 50,
+        borderTopRightRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    containerPoucentageAndBar: {
+        flexDirection: 'row',
+        flex: 1,
+        alignItems: 'flex-end',
+    },
+    decimalPart: {
+        fontSize: 14,
+        color: '#46494c'
+    }
 });

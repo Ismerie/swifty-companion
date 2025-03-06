@@ -122,7 +122,7 @@ export default function ProfileScreen({ route }) {
 									tabBarActiveTintColor: '#495057',
 									tabBarInactiveTintColor: 'gray',
 									tabBarIndicatorStyle: { 
-									backgroundColor: '#274c77',
+									backgroundColor: '#495057',
 									},
 									sceneStyle: { backgroundColor: 'transparent' }
 								})}
