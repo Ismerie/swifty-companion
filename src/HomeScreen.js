@@ -11,7 +11,6 @@ import {
 import { AlertNotificationRoot } from 'react-native-alert-notification';
 import SearchBar from './Home/SearchBar'
 import { screenHeight, screenWidth, spacing } from './Utils/constant';
-import { useStudent } from './Utils/studentContext';
 
 export default function HomeScreen() {
     // Animated values
@@ -102,8 +101,5 @@ export default function HomeScreen() {
         height: screenWidth / 2.88,
         width: screenWidth / 2.88,
     },
-    containerSearchBar: {
-        
-    }
     });
     

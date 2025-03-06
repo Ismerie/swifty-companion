@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Dimensions } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { screenHeight, screenWidth, spacing } from '../Utils/constant';
-import { useStudent } from '../Utils/studentContext';
 
 
 export default function ProfileScreen() {

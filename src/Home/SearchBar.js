@@ -15,7 +15,6 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [inputText, setInputText] = useState('');
     const [suggestionsStudents, setSuggestionsStudents] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [isKeyboardVisible, setKeyboardVisible] = useState(true);
     const [lengthSearch, setLenghtSearch] = useState(0)
 
     function handleSearch(text) {
@@ -78,21 +77,13 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                 setLenghtSearch(0);
             }
         }, 500); // Attente de 500ms avant d'envoyer la requête
-
-        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-            setKeyboardVisible(true);
-        });
-        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-            setKeyboardVisible(false);
-        });
-
-        return () => {
-            clearTimeout(delaySearch)
-            keyboardDidShowListener.remove();
-            keyboardDidHideListener.remove();
-        };
     
+        return () => {
+            clearTimeout(delaySearch);
+            setLoading(false); // Réinitialiser le loading à chaque effet
+        };
     }, [inputText]);
+    
     
     return (
         <>

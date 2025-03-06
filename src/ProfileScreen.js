@@ -6,7 +6,6 @@ import { StyleSheet,
 	ImageBackground,
 	ActivityIndicator,
 } from 'react-native';
-import { useRoute } from '@react-navigation/native';
 import { useStudent } from './Utils/studentContext';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
@@ -23,7 +22,7 @@ import ProjectsList from './Profile/ProjectsList';
 import SkillsList from './Profile/SkillsList';
 
 export default function ProfileScreen({ route }) {
-	const { student, projects, skills, setStudent, colorCoalition ,setColorCoalition, setProjects, setSkills } = useStudent();
+	const { setStudent, colorCoalition ,setColorCoalition, setProjects, setSkills } = useStudent();
 	const Tab = createMaterialTopTabNavigator();
 	const [loading, setLoading] = useState(true);
 	const navigation = useNavigation();
@@ -56,9 +55,6 @@ export default function ProfileScreen({ route }) {
 						transparence: "#FFFFFF33",
 						color: "#FFFFFF"
 					});
-
-					
-					
 				} else {
 					throw new Error('Error API 42');
 				}

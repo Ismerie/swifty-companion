@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Image, ProgressBarAndroid } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { useStudent } from '../Utils/studentContext';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { TextInput } from 'react-native-gesture-handler';
 
 export default function ProfileData() {
-    const { student, colorCoalition } = useStudent();
+    const { student } = useStudent();
     const [levelTrunc, setLevelTrunc] = useState(0);
     const [decimalPartLevel, setDecimalPartLevel] = useState(0);
 

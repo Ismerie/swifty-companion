@@ -8,8 +8,7 @@ import { StyleSheet,
     Keyboard,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useStudent } from '../Utils/studentContext';
-import { apiClient, screenHeight } from '../Utils/constant';
+import { screenHeight } from '../Utils/constant';
 
 import request from '../Utils/request';
 
@@ -20,7 +19,6 @@ export default function ListSearch({listStudents, lengthSearch}) {
         const handleSelectStudent = async (id) => {
             navigation.navigate('ProfileScreen', { studentId: id });
         };
-        
 
     useEffect(() => {
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {

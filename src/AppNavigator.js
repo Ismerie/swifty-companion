@@ -27,7 +27,6 @@ export default function AppNavigator() {
                         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
-
         </>
 	);
 }
