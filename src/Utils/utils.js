@@ -7,7 +7,7 @@ export const addTransparencyToHex = (hex, alpha) => {
 
     if (hex.length !== 6) {
         console.warn("Format hex invalide :", hex);
-        return "#FFFFFF33"; // Blanc avec 20% d'opacité par défaut
+        return "#FFFFFF33";
     }
 
     // Convertit alpha (0-1) en valeur hexadécimale

@@ -122,27 +122,27 @@ const styles = StyleSheet.create({
         paddingRight: 10,
     },
     progressBarContainer: {
-        minHeight: 48,  // Hauteur minimale
+        minHeight: 48,
         borderRadius: 5,
         overflow: 'hidden',
         justifyContent: 'center',
     },
     progressBar: {
-        minHeight: 48,  // Hauteur minimale ajustable
-        paddingVertical: 5, // Ajoute un peu d'espace pour le texte
+        minHeight: 48,
+        paddingVertical: 5,
         backgroundColor: '#274c77',
         borderEndEndRadius: 20,
         borderTopRightRadius: 20,
         justifyContent: 'center',
-        alignItems: 'center', // Centre le texte
+        alignItems: 'center',
     },
     nameSkill: {
         flexWrap: 'wrap',
         fontSize: 16,
         flex: 2,
-        textAlign: 'center',  // Centre le texte
-        paddingHorizontal: 5,  // Ajoute de l'espace pour éviter le crop
-        numberOfLines: 2,  // Permet d'afficher deux lignes max
+        textAlign: 'center',
+        paddingHorizontal: 5,
+        numberOfLines: 2, 
     },
     emptySkills: {
         textAlign: 'center',

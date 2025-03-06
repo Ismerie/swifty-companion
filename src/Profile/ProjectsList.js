@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function ProjectsList() {
     const { student, colorCoalition, projects } = useStudent();
-    const [projectDetails, setProjectDetails] = useState({}); // Stocke les détails récupérés 
+    const [projectDetails, setProjectDetails] = useState({});
 
     const fetchProjectDetails = async (projects) => {
         const details = {};

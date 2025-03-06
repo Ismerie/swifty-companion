@@ -44,7 +44,7 @@ export default function ListSearch({listStudents, lengthSearch}) {
                 keyExtractor={item => item.id.toString()}
                 keyboardShouldPersistTaps="handled" // Assure que le scroll fonctionne même quand le clavier est affiché
                 onStartShouldSetResponder={() => false} // Désactive la capture du toucher au début pour éviter les conflits
-                contentContainerStyle={{ flexGrow: 1 }} // Permet de scroller vers le bas aussi
+                contentContainerStyle={{ flexGrow: 1 }}
                 renderItem={({ item }) => (
                     <TouchableOpacity 
                         style={styles.card}

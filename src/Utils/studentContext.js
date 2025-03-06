@@ -25,7 +25,7 @@ export const StudentProvider = ({ children }) => {
             setSkills,
             projects,
             setProjects,
-            }}>
+        }}>
             {children}
         </StudentContext.Provider>
     );

@@ -73,7 +73,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
             } else {
                 setSuggestionsStudents([]);
             }
-        }, 500); // Attente de 300ms avant d'envoyer la requête
+        }, 500); // Attente de 500ms avant d'envoyer la requête
 
         const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
             setKeyboardVisible(true);

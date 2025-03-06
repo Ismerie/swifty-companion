@@ -11,7 +11,7 @@ import ProfileScreen from './ProfileScreen';
 const Stack = createStackNavigator();
 
 export default function AppNavigator() {
-	const { student, setStudent } = useStudent(null);
+	const { student } = useStudent(null);
 
 	return (
 		<>
