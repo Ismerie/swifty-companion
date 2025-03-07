@@ -1,4 +1,4 @@
-# 42_swifty-conpanion
+# 42_swifty-companion
 42_swifty-companion est un projet post tronc-commun de la branche mobile de l'école 42. Ce projet consiste à créer une application mobile qui permet de rechercher un étudiant 42 et d'afficher son profil grâce à l'api 42.
 
 ## 📋 Fonctionnalités
