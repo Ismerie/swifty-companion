@@ -43,8 +43,8 @@ OU
 Pour avoir accès à l'API 42, vous devez une créer une **application sur l'intra 42** qui fournira l'ID et le Secret qui permettre d'obtenir le token pour les requêtes.
 Ensuite crée un fichier **.env** à la racine du projet avec l'ID et le Secret, configuré comme ceci :
 ```
-CLIENT_ID=u-s4t2ud-e47acc752052c4fa979c83d900fb10f7ce2d36614ef79c3b783a36d99078f901
-CLIENT_SECRET=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
+CLIENT_ID=
+CLIENT_SECRET=
 ```
 Une fois votre émulateur prêt et le .env crée vous pouvez lancer le projet
 
