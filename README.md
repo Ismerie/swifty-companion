@@ -43,7 +43,7 @@ L'application doit :
 </div> 
 
 ## 🛠️ Usage
-Pour exécuter Swifty Companion sur un émulateur Android, il est nécessaire de disposer de certaines configurations sur ton environnement local. Voici les outils requis :
+Pour exécuter Swifty Companion sur un émulateur Android, il est nécessaire de disposer de certaines configurations sur votre environnement local. Voici les outils requis :
 
 * ```Android Studio``` : Téléchargez et installez Android Studio, qui inclut l'émulateur Android et les outils nécessaires pour le développement mobile.
 
