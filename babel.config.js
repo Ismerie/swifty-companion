@@ -1,5 +1,4 @@
-console.log("Babel config chargé !");
 module.exports = {
-    presets: ['module:metro-react-native-babel-preset'],
-    plugins: ['module:react-native-dotenv'],
+    presets: ['babel-preset-expo'],
+    plugins: ['module:react-native-dotenv']
 };

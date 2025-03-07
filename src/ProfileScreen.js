@@ -108,7 +108,7 @@ export default function ProfileScreen({ route }) {
 								screenOptions={({ route }) => ({
 									tabBarIcon: ({ color, size }) => {
 										let iconName;
-										if (route.name === 'Projets') iconName = 'folder-outline';
+										if (route.name === 'Projects') iconName = 'folder-outline';
 										else if (route.name === 'Skills') iconName = 'bulb-outline';
 										return <Icon name={iconName} size={size} color={color} />;
 									},
@@ -121,7 +121,7 @@ export default function ProfileScreen({ route }) {
 									sceneStyle: { backgroundColor: 'transparent' }
 								})}
 								>
-									<Tab.Screen name="Projets" component={ProjectsList} />
+									<Tab.Screen name="Projects" component={ProjectsList} />
 									<Tab.Screen name="Skills" component={SkillsList} />
 								</Tab.Navigator>
 							</>
