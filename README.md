@@ -3,7 +3,7 @@
 
 ## 📋 Fonctionnalités
 L'application doit :
-* avoir au moins **2vues**
+* avoir au moins **2 vues**
 * afficher **les informations** des étudiants
 * afficher **les projets** réussis et ratés
 * afficher **les compétences** et leur pourcentages
@@ -11,25 +11,36 @@ L'application doit :
 ### ✨ Bonus
 * le **token doit être recrée à son expiration**
 
-### ⌨️ Les Technos
+## ⌨️ Les Technos
 
 * Language mobile : **React-Native**
 
 ## 📷 Aperçus
 
 ### Welcome
-![alt-text](https://github.com/Ismerie/swifty-companion/blob/main/preview/welcome.jpg)
-![alt-text](https://github.com/Ismerie/swifty-companion/blob/main/preview/listSearch.jpg)
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/welcome.jpg" alt="Preview acceuil" width="300"/>
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/listSearch.jpg" alt="Preview recherche" width="300"/>
+</div>  
+
 ### Projets
-![alt-text](https://github.com/Ismerie/swifty-companion/blob/main/preview/projects.jpg)
-![alt-text](https://github.com/Ismerie/swifty-companion/blob/main/preview/projects2.jpg)
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/projects.jpg" alt="Preview projets" width="300"/>
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/projects2.jpg" alt="Preview projets" width="300"/>
+</div> 
+
 ### Skills
-![alt-text](https://github.com/Ismerie/swifty-companion/blob/main/preview/skills.jpg)
-![alt-text](https://github.com/Ismerie/swifty-companion/blob/main/preview/skills2.jpg)
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/skills.jpg" alt="Preview compétences" width="300"/>
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/skills2.jpg" alt="Preview compétences" width="300"/>
+</div> 
+
 ### Gestion d'erreur
-![alt-text](https://github.com/Ismerie/swifty-companion/blob/main/preview/errorAPI.jpg)
-![alt-text](https://github.com/Ismerie/swifty-companion/blob/main/preview/notFound.jpg)
-![alt-text](https://github.com/Ismerie/swifty-companion/blob/main/preview/emptyProfile.jpg)
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/errorAPI.jpg" alt="Preview erreur API" width="300"/>
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/notFound.jpg" alt="Preview erreur pas d´étudiants trouvés" width="300"/>
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/emptyProfile.jpg" alt="Preview profil vide" width="300"/>
+</div> 
 
 ## 🛠️ Usage
 Pour exécuter Swifty Companion sur un émulateur Android, il est nécessaire de disposer de certaines configurations sur ton environnement local. Voici les outils requis :
