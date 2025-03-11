@@ -2238,9 +2238,9 @@ at-least-node@^1.0.0:
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
 axios@^1.7.9:
-  version "1.7.9"
-  resolved "https://registry.npmjs.org/axios/-/axios-1.7.9.tgz"
-  integrity sha512-LhLcE7Hbiryz8oMDdDptSrWowmB4Bl6RCt6sIJKpRB4XtVf0iEgewX3au/pJqm+Py1kCASkb/FFKjxQaLtxJvw==
+  version "1.8.2"
+  resolved "https://registry.npmjs.org/axios/-/axios-1.8.2.tgz"
+  integrity sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"
@@ -3853,7 +3853,7 @@ internal-ip@^4.3.0:
     default-gateway "^4.2.0"
     ipaddr.js "^1.9.0"
 
-invariant@^2.2.4:
+invariant@^2.2.4, invariant@2.2.4:
   version "2.2.4"
   resolved "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -5250,6 +5250,19 @@ react-native-alert-notification@^0.4.2:
   resolved "https://registry.npmjs.org/react-native-alert-notification/-/react-native-alert-notification-0.4.2.tgz"
   integrity sha512-98EQ+DtI7thEAHzoXMbN8dZRCFcoGXMRYYIKvooPPdASuuZIuON4oxCbJNDb6r6lebnPc/25JCD1tJPaoPNWnw==
 
+react-native-app-auth@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.npmjs.org/react-native-app-auth/-/react-native-app-auth-8.0.1.tgz"
+  integrity sha512-NAzxPS3yOICz/vYGRvTeP+d8mWnrakqFmQgwLfPMhV79dL/BM5d7CAfmMdtYGHhkCB/3AL8KHhrp05NmmM3ZhQ==
+  dependencies:
+    invariant "2.2.4"
+    react-native-base64 "0.0.2"
+
+react-native-base64@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.npmjs.org/react-native-base64/-/react-native-base64-0.0.2.tgz"
+  integrity sha512-Fu/J1a2y0X22EJDWqJR2oEa1fpP4gTFjYxk8ElJdt1Yak3HOXmFJ7EohLVHU2DaQkgmKfw8qb7u/48gpzveRbg==
+
 react-native-dotenv@^3.4.11:
   version "3.4.11"
   resolved "https://registry.npmjs.org/react-native-dotenv/-/react-native-dotenv-3.4.11.tgz"
@@ -5327,7 +5340,7 @@ react-native-tab-view@^4.0.5:
   dependencies:
     use-latest-callback "^0.2.1"
 
-react-native@*, react-native@>=0.62.0, react-native@0.76.6:
+react-native@*, react-native@>=0.62.0, react-native@>=0.63.0, react-native@0.76.6:
   version "0.76.6"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.76.6.tgz"
   integrity sha512-AsRi+ud6v6ADH7ZtSOY42kRB4nbM0KtSu450pGO4pDudl4AEK/AF96ai88snb2/VJJSGGa/49QyJVFXxz/qoFg==

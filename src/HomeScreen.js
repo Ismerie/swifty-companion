@@ -7,10 +7,13 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
     Animated,
+    TouchableOpacity,
+    Text,
 } from 'react-native';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
 import SearchBar from './Home/SearchBar'
-import { screenHeight, screenWidth, spacing } from './Utils/constant';
+import { screenHeight, screenWidth } from './Utils/constant';
+import {signInWith42} from './Utils/getAccessToken';
 
 export default function HomeScreen() {
     // Animated values
@@ -18,6 +21,10 @@ export default function HomeScreen() {
     const translateY = useRef(new Animated.Value(0)).current;
     const [inputIsFocused, setInputIsFocused] = useState(false);
 
+    const handleSignIn = () => {
+        signInWith42();
+    }
+    
     function handleFocus() {
         setInputIsFocused(true);
         Animated.parallel([
@@ -70,6 +77,11 @@ export default function HomeScreen() {
                                 justifyContent: 'end',
                                 width: '100%',
                             }}>
+                                <TouchableOpacity 
+                                    onPress={() => handleSignIn()}
+                                >
+                                    <Text>Sign In</Text>
+                                </TouchableOpacity>
                                 <SearchBar handleBlur={handleBlur} handleFocus={handleFocus} inputIsFocused={inputIsFocused}/>
                             </View>
                         </Animated.View>
@@ -101,4 +113,3 @@ export default function HomeScreen() {
         width: screenWidth / 2.88,
     },
     });
-    
