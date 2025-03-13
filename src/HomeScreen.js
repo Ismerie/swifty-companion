@@ -14,15 +14,18 @@ import { AlertNotificationRoot } from 'react-native-alert-notification';
 import SearchBar from './Home/SearchBar'
 import { screenHeight, screenWidth } from './Utils/constant';
 import {signInWith42} from './Utils/getAccessToken';
+import { useStudent } from './Utils/studentContext';
+
 
 export default function HomeScreen() {
     // Animated values
     const logoOpacity = useRef(new Animated.Value(1)).current;
     const translateY = useRef(new Animated.Value(0)).current;
     const [inputIsFocused, setInputIsFocused] = useState(false);
+    const { token, setToken } = useStudent();
 
     const handleSignIn = () => {
-        signInWith42();
+        signInWith42(setToken);
     }
     
     function handleFocus() {
@@ -56,7 +59,7 @@ export default function HomeScreen() {
                 }),
             ]).start();
             Keyboard.dismiss();
-        }
+    }
         
     return (
         <AlertNotificationRoot>        
@@ -77,12 +80,16 @@ export default function HomeScreen() {
                                 justifyContent: 'end',
                                 width: '100%',
                             }}>
+                            {token ? (
+                                <SearchBar handleBlur={handleBlur} handleFocus={handleFocus} inputIsFocused={inputIsFocused}/>
+                            ):(
                                 <TouchableOpacity 
+                                    style={styles.btnSignIn}
                                     onPress={() => handleSignIn()}
                                 >
-                                    <Text>Sign In</Text>
+                                    <Text style={styles.btnSignInText}>Sign In</Text>
                                 </TouchableOpacity>
-                                <SearchBar handleBlur={handleBlur} handleFocus={handleFocus} inputIsFocused={inputIsFocused}/>
+                            )}
                             </View>
                         </Animated.View>
                     </SafeAreaView>
@@ -92,7 +99,7 @@ export default function HomeScreen() {
     );
     }
     
-    const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
@@ -112,4 +119,16 @@ export default function HomeScreen() {
         height: screenWidth / 2.88,
         width: screenWidth / 2.88,
     },
-    });
+    btnSignIn: {
+        width: screenWidth / 2,
+        height: screenWidth / 7,
+        backgroundColor: '#edede9',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+    },
+    btnSignInText: {
+        fontSize: 20,
+        textAlign: 'center',
+    }
+});

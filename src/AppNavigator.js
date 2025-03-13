@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { SafeAreaView, Text, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -11,12 +11,19 @@ import ProfileScreen from './ProfileScreen';
 const Stack = createStackNavigator();
 
 export default function AppNavigator() {
-	const { student } = useStudent(null);
+	const { student, token } = useStudent(null);
+    const navigationRef = React.useRef(null);
+
+    useEffect(() => {
+        if (!token && navigationRef.current) {
+            navigationRef.current.navigate('HomeScreen'); // Redirige vers HomeScreen
+        }
+    }, [student]);
 
 	return (
 		<>
             <StatusBar hidden={true}/>
-            <NavigationContainer styles={styles.container}>
+            <NavigationContainer styles={styles.container} ref={navigationRef}>
                 <Stack.Navigator
                     initialRouteName={student ? "ProfileScreen" : "HomeScreen"}
                     screenOptions={({ route, navigation }) => ({
@@ -38,3 +45,4 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 });
+ 

@@ -10,6 +10,7 @@ import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 import ListSearch from './ListSearch';
 import { apiClient, screenWidth, screenHeight } from '../Utils/constant';
+import request from '../Utils/request'
 
 export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [inputText, setInputText] = useState('');
@@ -26,43 +27,28 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
             setSuggestionsStudents([]);
             return;
         }
-
-        try {
-            const res = await apiClient.get('/users', {
-                params: {
-                    'range[login]': `${searchStudent.toLowerCase()},${searchStudent.toLowerCase()}zzz`
-                }
+    
+        const dataSuggestions = await request.getListSearchStudents(searchStudent);
+    
+        if (dataSuggestions.success && dataSuggestions.suggestions.length !== 0) {
+            setSuggestionsStudents(dataSuggestions.suggestions);
+            setLenghtSearch(inputText.replace(/[ .]/g, "").length);
+        } 
+        else if (dataSuggestions.success && dataSuggestions.suggestions.length === 0) {
+            Toast.show({
+                type: ALERT_TYPE.WARNING,
+                title: 'No results',
+                textBody: 'No student found.',
             });
-            if (res.status != "200") throw new Error('Error API 42');
-            if (res.data.length > 0) {
-                const suggestions = res.data.map(user => ({
-                    id: user.id,
-                    login: user.login,
-                    firstName: user.first_name,
-                    lastName: user.last_name,
-                    image: user.image?.versions?.small || null
-                }))
-                setSuggestionsStudents(suggestions);
-                setLenghtSearch(inputText.replace(/[ .]/g, "").length);
-            }
-            else if (res.data.length === 0) {
-                Toast.show({
-                    type: ALERT_TYPE.WARNING,
-                    title: 'No results',
-                    textBody: 'No student found.',
-                });
-                setSuggestionsStudents([]);
-                setLenghtSearch(0);
-            }
+            setSuggestionsStudents([]);
+            setLenghtSearch(0);
         }
-        catch (error) {
-            console.log(error)
+        else {
             Toast.show({
                 type: ALERT_TYPE.DANGER,
                 title: 'Error',
-                textBody: 'Error connecting to API 42. Retry later.',
+                textBody: 'An unexpected error occurred. Please try again later.',
             });
-            
         }
         setLoading(false);
     }
@@ -80,7 +66,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     
         return () => {
             clearTimeout(delaySearch);
-            setLoading(false); // Réinitialiser le loading à chaque effet
+            setLoading(false);
         };
     }, [inputText]);
     
@@ -94,7 +80,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                     value={inputText}
                     onChangeText={setInputText}
                     onSubmitEditing={handleSearch}
-                    placeholder="Search student..."
+                    placeholder="Search login student..."
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                 />

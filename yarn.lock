@@ -214,12 +214,12 @@
     "@babel/types" "^7.25.9"
 
 "@babel/helpers@^7.26.9":
-  version "7.26.9"
-  resolved "https://registry.npmjs.org/@babel/helpers/-/helpers-7.26.9.tgz"
-  integrity sha512-Mz/4+y8udxBKdmzt/UjPACs4G3j5SshJJEFFKxlCGPydG4JAHXxjWjAwjd09tf6oINvl1VfMJo+nB7H2YKQ0dA==
+  version "7.26.10"
+  resolved "https://registry.npmjs.org/@babel/helpers/-/helpers-7.26.10.tgz"
+  integrity sha512-UPYc3SauzZ3JGgj87GgZ89JVdC5dj0AoetR5Bw6wj4niittNyFh6+eOGonYvJ1ao6B8lEa3Q3klS7ADZ53bc5g==
   dependencies:
     "@babel/template" "^7.26.9"
-    "@babel/types" "^7.26.9"
+    "@babel/types" "^7.26.10"
 
 "@babel/highlight@^7.10.4":
   version "7.25.9"
@@ -1078,9 +1078,9 @@
     source-map-support "^0.5.16"
 
 "@babel/runtime@^7.20.0", "@babel/runtime@^7.20.6", "@babel/runtime@^7.25.0", "@babel/runtime@^7.8.4":
-  version "7.26.9"
-  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.26.9.tgz"
-  integrity sha512-aA63XwOkcl4xxQa3HjPMqOP6LiK0ZDv3mUPYEFXkpHbaFjtGggE1A61FjFzJnB+p7/oy2gA8E+rcBNl/zC1tMg==
+  version "7.26.10"
+  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.26.10.tgz"
+  integrity sha512-2WJMeRQPHKSPemqk/awGrAiuFfzBmOIPXKizAsVhWH9YJqLZ0H+HS4c8loHGgW6utJ3E/ejXQUsiGaQy2NZ9Fw==
   dependencies:
     regenerator-runtime "^0.14.0"
 
@@ -1119,10 +1119,10 @@
     debug "^4.3.1"
     globals "^11.1.0"
 
-"@babel/types@^7.0.0", "@babel/types@^7.20.0", "@babel/types@^7.20.7", "@babel/types@^7.25.2", "@babel/types@^7.25.9", "@babel/types@^7.26.9", "@babel/types@^7.3.3", "@babel/types@^7.4.4":
-  version "7.26.9"
-  resolved "https://registry.npmjs.org/@babel/types/-/types-7.26.9.tgz"
-  integrity sha512-Y3IR1cRnOxOCDvMmNiym7XpXQ93iGDDPHx+Zj+NM+rg0fBaShfQLkg+hKPaZCEvg5N/LeCo4+Rj/i3FuJsIQaw==
+"@babel/types@^7.0.0", "@babel/types@^7.20.0", "@babel/types@^7.20.7", "@babel/types@^7.25.2", "@babel/types@^7.25.9", "@babel/types@^7.26.10", "@babel/types@^7.26.9", "@babel/types@^7.3.3", "@babel/types@^7.4.4":
+  version "7.26.10"
+  resolved "https://registry.npmjs.org/@babel/types/-/types-7.26.10.tgz"
+  integrity sha512-emqcG3vHrpxUKTrxcblR36dcrcoRDvKmnL/dCL6ZsHaShW80qxCAcNhzQZrpeM765VzEos+xOi4s+r4IXzTwdQ==
   dependencies:
     "@babel/helper-string-parser" "^7.25.9"
     "@babel/helper-validator-identifier" "^7.25.9"
@@ -4880,6 +4880,11 @@ open@^8.0.4:
     is-docker "^2.1.1"
     is-wsl "^2.2.0"
 
+opencollective-postinstall@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz"
+  integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
+
 ora@^3.4.0:
   version "3.4.0"
   resolved "https://registry.npmjs.org/ora/-/ora-3.4.0.tgz"
@@ -5279,6 +5284,14 @@ react-native-gesture-handler@^2.23.1, "react-native-gesture-handler@>= 2.0.0":
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
 
+react-native-inappbrowser-reborn@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.npmjs.org/react-native-inappbrowser-reborn/-/react-native-inappbrowser-reborn-3.7.0.tgz"
+  integrity sha512-Ia53jYNtFcbNaX5W3QfOmN25I7bcvuDiQmSY5zABXjy4+WI20bPc9ua09li55F8yDCjv3C99jX6vKms68mBV7g==
+  dependencies:
+    invariant "^2.2.4"
+    opencollective-postinstall "^2.0.3"
+
 react-native-linear-gradient@^2.8.3:
   version "2.8.3"
   resolved "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz"
@@ -5340,7 +5353,7 @@ react-native-tab-view@^4.0.5:
   dependencies:
     use-latest-callback "^0.2.1"
 
-react-native@*, react-native@>=0.62.0, react-native@>=0.63.0, react-native@0.76.6:
+react-native@*, react-native@>=0.56, react-native@>=0.62.0, react-native@>=0.63.0, react-native@0.76.6:
   version "0.76.6"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.76.6.tgz"
   integrity sha512-AsRi+ud6v6ADH7ZtSOY42kRB4nbM0KtSu450pGO4pDudl4AEK/AF96ai88snb2/VJJSGGa/49QyJVFXxz/qoFg==

@@ -5,6 +5,7 @@ import * as NavigationBar from 'expo-navigation-bar';
 
 import AppNavigator from './src/AppNavigator';
 import { StudentProvider } from './src/Utils/studentContext'
+import { useSetupApiClient } from './src/Utils/useSetUpApiClient';
 
 export default function App() {
 

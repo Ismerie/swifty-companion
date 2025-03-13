@@ -1,5 +1,4 @@
 import axios from 'axios'
-import getAccessToken from './getAccessToken'
 import { Dimensions } from 'react-native'
 
 export const apiClient = axios.create({
@@ -7,15 +6,6 @@ export const apiClient = axios.create({
     headers: {
         'Content-Type': 'application/json',
     }
-})
-
-apiClient.interceptors.request.use(async (config) => {
-    const accessToken = await getAccessToken();
-    
-    config.headers.Authorization = `Bearer ${accessToken}`;
-    return config;
-}, (error) => {
-    return Promise.reject(error);
 })
 
 export const screenHeight = Dimensions.get('window').height;

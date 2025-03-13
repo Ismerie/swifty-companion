@@ -22,7 +22,7 @@ import ProjectsList from './Profile/ProjectsList';
 import SkillsList from './Profile/SkillsList';
 
 export default function ProfileScreen({ route }) {
-	const { setStudent, colorCoalition ,setColorCoalition, setProjects, setSkills } = useStudent();
+	const { setStudent, colorCoalition ,setColorCoalition, setProjects, setSkills, token } = useStudent();
 	const Tab = createMaterialTopTabNavigator();
 	const [loading, setLoading] = useState(true);
 	const navigation = useNavigation();
@@ -81,6 +81,10 @@ export default function ProfileScreen({ route }) {
 		fetchData();
 	}, []);
 	
+	useEffect(() => {
+		if (!token)
+			navigation.navigate('HomeScreen');
+	}, [token])
 
 	return (
 			<AlertNotificationRoot>
