@@ -10,8 +10,6 @@ import { StyleSheet,
 import { useNavigation } from '@react-navigation/native';
 import { screenHeight } from '../Utils/constant';
 
-import request from '../Utils/request';
-
 export default function ListSearch({listStudents, lengthSearch}) {
     const navigation = useNavigation();
     const [isKeyboardVisible, setKeyboardVisible] = useState(true);        

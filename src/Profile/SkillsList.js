@@ -5,7 +5,6 @@ import { StyleSheet,
     FlatList,
 } from 'react-native';
 
-import { screenHeight, screenWidth, apiClient } from '../Utils/constant';
 import { useStudent } from '../Utils/studentContext';
 
 export default function SkillsList() {

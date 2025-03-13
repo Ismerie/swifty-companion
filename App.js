@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Platform } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import * as NavigationBar from 'expo-navigation-bar';
 
 import AppNavigator from './src/AppNavigator';
@@ -16,8 +16,7 @@ export default function App() {
 			NavigationBar.setBehaviorAsync('overlay-swipe');
 		}
 	}, []);
-
-	// Si l'utilisateur est connecté, il est redirigé vers ProfileScreen, sinon vers LoginScreen
+	
 	return (
 			<StudentProvider>
 				<AppNavigator />

@@ -22,7 +22,7 @@ import ProjectsList from './Profile/ProjectsList';
 import SkillsList from './Profile/SkillsList';
 
 export default function ProfileScreen({ route }) {
-	const { setStudent, colorCoalition ,setColorCoalition, setProjects, setSkills, token } = useStudent();
+	const { setStudent, colorCoalition ,setColorCoalition, setProjects, setSkills, token, setToken } = useStudent();
 	const Tab = createMaterialTopTabNavigator();
 	const [loading, setLoading] = useState(true);
 	const navigation = useNavigation();
@@ -75,6 +75,7 @@ export default function ProfileScreen({ route }) {
 					title: 'Error',
 					textBody: 'An unexpected error occurred. Please try again later.',
 				});
+				setToken(null);
 				navigation.navigate('HomeScreen');
 			}
 		};

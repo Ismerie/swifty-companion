@@ -9,14 +9,16 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 import ListSearch from './ListSearch';
-import { apiClient, screenWidth, screenHeight } from '../Utils/constant';
+import { screenWidth } from '../Utils/constant';
 import request from '../Utils/request'
+import { useStudent } from '../Utils/studentContext';
 
 export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [inputText, setInputText] = useState('');
     const [suggestionsStudents, setSuggestionsStudents] = useState([]);
     const [loading, setLoading] = useState(false);
     const [lengthSearch, setLenghtSearch] = useState(0)
+    const { setToken } = useStudent();
 
     function handleSearch(text) {
         Keyboard.dismiss();
@@ -49,6 +51,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
                 title: 'Error',
                 textBody: 'An unexpected error occurred. Please try again later.',
             });
+            setToken(null);
         }
         setLoading(false);
     }

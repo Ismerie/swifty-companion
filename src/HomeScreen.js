@@ -27,7 +27,7 @@ export default function HomeScreen() {
     const handleSignIn = () => {
         signInWith42(setToken);
     }
-    
+
     function handleFocus() {
         setInputIsFocused(true);
         Animated.parallel([

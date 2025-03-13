@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { SafeAreaView, Text, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useStudent } from './Utils/studentContext';
