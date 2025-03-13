@@ -20,6 +20,7 @@ export const signInWith42 = async (setToken) => {
             setToken({
                 accessToken: authState.accessToken,
                 tokenExpiration: new Date(authState.accessTokenExpirationDate),
+                //tokenExpiration: new Date(new Date().getTime() - 10000),
                 refreshToken: authState.refreshToken,
             })
         }
@@ -36,7 +37,7 @@ const refreshAccessToken = async (token, setToken) => {
             return null;
         }
     }
-
+    console.log("refresh test");
     try {
         const newAuthState = await refresh(config, {
             refreshToken: token.refreshToken,
@@ -51,7 +52,7 @@ const refreshAccessToken = async (token, setToken) => {
 
         })
 
-        return token.accessToken;
+        return newAuthState.accessToken;
     } catch (error) {
         console.error("Erreur lors du rafraîchissement du token :", error);
         setToken(null);
