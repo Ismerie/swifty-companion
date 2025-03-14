@@ -1,5 +1,6 @@
 export const addTransparencyToHex = (hex, alpha) => {
-    // Vérifie si la couleur hex est valide
+    hex = hex.trim();
+    
     if (!/^#[0-9A-Fa-f]{6}$/.test(hex) && !/^#[0-9A-Fa-f]{3}$/.test(hex)) {
         console.warn("Format hex invalide :", hex);
         return "#FFFFFF33";

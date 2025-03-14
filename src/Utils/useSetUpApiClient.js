@@ -6,7 +6,7 @@ export const useSetupApiClient = (token, setToken) => {
     useEffect(() => {
         const requestInterceptor = apiClient.interceptors.request.use(
             async (config) => {
-                const accessToken = await getAccessToken(token, setToken);
+                const accessToken = await getAccessToken(setToken);
 
                 if (accessToken) {
                     config.headers.Authorization = `Bearer ${accessToken}`;

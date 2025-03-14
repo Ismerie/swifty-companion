@@ -12,6 +12,7 @@ import ListSearch from './ListSearch';
 import { screenWidth } from '../Utils/constant';
 import request from '../Utils/request'
 import { useStudent } from '../Utils/studentContext';
+import { logout } from '../Utils/getAccessToken';
 
 export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [inputText, setInputText] = useState('');
@@ -20,7 +21,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
     const [lengthSearch, setLenghtSearch] = useState(0)
     const { setToken } = useStudent();
 
-    function handleSearch(text) {
+    function handleSearch() {
         Keyboard.dismiss();
     }
 
@@ -30,7 +31,7 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
             return;
         }
     
-        const dataSuggestions = await request.getListSearchStudents(searchStudent);
+        const dataSuggestions = await request.getListSearchStudents(searchStudent, setToken);
     
         if (dataSuggestions.success && dataSuggestions.suggestions.length !== 0) {
             setSuggestionsStudents(dataSuggestions.suggestions);
@@ -45,13 +46,13 @@ export default function SearchBar({handleBlur, handleFocus, inputIsFocused}) {
             setSuggestionsStudents([]);
             setLenghtSearch(0);
         }
-        else {
+        else  {
             Toast.show({
                 type: ALERT_TYPE.DANGER,
                 title: 'Error',
                 textBody: 'An unexpected error occurred. Please try again later.',
             });
-            setToken(null);
+            await logout(setToken);
         }
         setLoading(false);
     }

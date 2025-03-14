@@ -12,11 +12,13 @@ import { AlertNotificationRoot } from 'react-native-alert-notification';
 import { screenWidth} from './Utils/constant';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useNavigation } from '@react-navigation/native';
+import { ALERT_TYPE, Toast } from 'react-native-alert-notification';
 
 import TopBar from './Profile/TopBar'
 import ProfileData from './Profile/ProfileData'
 import request from './Utils/request';
 import { addTransparencyToHex } from './Utils/utils';
+import { logout } from './Utils/getAccessToken';
 
 import ProjectsList from './Profile/ProjectsList';
 import SkillsList from './Profile/SkillsList';
@@ -31,12 +33,12 @@ export default function ProfileScreen({ route }) {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const dataProfileStudent = await request.getProfileStudent(studentId); 
+				const dataProfileStudent = await request.getProfileStudent(studentId, setToken); 
 	
 				if (dataProfileStudent.success) {
 					setStudent(dataProfileStudent.data);
 				} else {
-					throw new Error('Error API 42');
+					throw new Error(dataProfileStudent.error);
 				}
 	
 				const filteredProjects = dataProfileStudent.data.projects_users.filter(
@@ -44,7 +46,7 @@ export default function ProfileScreen({ route }) {
 				);
 				setProjects(filteredProjects);
 	
-				const dataColor = await request.getColorCoalitionStudent(studentId);
+				const dataColor = await request.getColorCoalitionStudent(studentId, setToken);
 				if (dataColor.success && dataColor.data) {
 					setColorCoalition({
 						transparence: addTransparencyToHex(dataColor.data, 0.2),
@@ -56,7 +58,7 @@ export default function ProfileScreen({ route }) {
 						color: "#FFFFFF"
 					});
 				} else {
-					throw new Error('Error API 42');
+					throw new Error(dataColor.error);
 				}
 				setLoading(false)	
 				for (let i = 0; i < dataProfileStudent.data.cursus_users.length; i++) {
@@ -69,23 +71,20 @@ export default function ProfileScreen({ route }) {
 				}
 
 			} catch (error) {
-				console.error("Error in handleSelectStudent:", error);
+				//console.error("Error in handleSelectStudent:", error.message);
 				Toast.show({
 					type: ALERT_TYPE.DANGER,
 					title: 'Error',
 					textBody: 'An unexpected error occurred. Please try again later.',
 				});
-				setToken(null);
-				navigation.navigate('HomeScreen');
+				setTimeout(async () => {
+					await logout(setToken);
+					navigation.navigate('HomeScreen');
+				}, 3000);
 			}
 		};
 		fetchData();
 	}, []);
-	
-	useEffect(() => {
-		if (!token)
-			navigation.navigate('HomeScreen');
-	}, [token])
 
 	return (
 			<AlertNotificationRoot>
@@ -102,7 +101,7 @@ export default function ProfileScreen({ route }) {
 						{loading ? (
 							<View style={styles.loadingContainer}>
 								<ActivityIndicator size="large" color="#333533" />
-						</View>
+							</View>
 						):(
 							<>
 								<View style={{padding: screenWidth * 0.05}}>

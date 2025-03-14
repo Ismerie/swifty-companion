@@ -3289,6 +3289,11 @@ expo-navigation-bar@~4.0.7:
     "@react-native/normalize-colors" "0.76.7"
     debug "^4.3.2"
 
+expo-secure-store@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.npmjs.org/expo-secure-store/-/expo-secure-store-14.0.1.tgz"
+  integrity sha512-QUS+j4+UG4jRQalgnpmTvvrFnMVLqPiUZRzYPnG3+JrZ5kwVW2w6YS3WWerPoR7C6g3y/a2htRxRSylsDs+TaQ==
+
 expo-status-bar@~2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-2.0.1.tgz"

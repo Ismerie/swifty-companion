@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useSetupApiClient } from './useSetUpApiClient';
+import { getStoredToken } from './getAccessToken';
 
 const StudentContext = createContext();
 

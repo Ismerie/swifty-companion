@@ -9,20 +9,23 @@ import {
     Animated,
     TouchableOpacity,
     Text,
+    ActivityIndicator,
 } from 'react-native';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
 import SearchBar from './Home/SearchBar'
 import { screenHeight, screenWidth } from './Utils/constant';
-import {signInWith42} from './Utils/getAccessToken';
+import { signInWith42 } from './Utils/getAccessToken';
 import { useStudent } from './Utils/studentContext';
+import { getStoredToken } from './Utils/getAccessToken';
 
 
 export default function HomeScreen() {
-    // Animated values
     const logoOpacity = useRef(new Animated.Value(1)).current;
     const translateY = useRef(new Animated.Value(0)).current;
     const [inputIsFocused, setInputIsFocused] = useState(false);
     const { token, setToken } = useStudent();
+    const [loading, setLoading] = useState(true);
+
 
     const handleSignIn = () => {
         signInWith42(setToken);
@@ -60,6 +63,16 @@ export default function HomeScreen() {
             ]).start();
             Keyboard.dismiss();
     }
+
+    useEffect(() => {
+            const fetchToken = async () => {
+                const storedToken = await getStoredToken();
+                setToken(storedToken ? true : false);
+                setLoading(false)
+            };
+        
+            fetchToken();
+        }, []);
         
     return (
         <AlertNotificationRoot>        
@@ -70,6 +83,11 @@ export default function HomeScreen() {
             >
                 <TouchableWithoutFeedback onPress={handleBlur} accessible={false}>
                     <SafeAreaView style={styles.container}>
+                    {loading ? (
+                        <View style={styles.loadingContainer}>
+                            <ActivityIndicator size="large" color="#333533" />
+                        </View>
+                    ):(
                         <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }]}]}>
                             <Animated.Image 
                                 source={require('../assets/42logo.png')}
@@ -92,6 +110,7 @@ export default function HomeScreen() {
                             )}
                             </View>
                         </Animated.View>
+                    )}
                     </SafeAreaView>
                 </TouchableWithoutFeedback>
             </ImageBackground>
