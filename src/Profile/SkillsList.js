@@ -16,16 +16,16 @@ export default function SkillsList() {
         let result = 0;
     
         level = Math.trunc(level) || 0; 
-        result = (level * 100) / maxLevel;
+        result = (level * 70) / maxLevel;
 
         if (levelMin === 0  || level < levelMin && level != 0)
             levelMin = level;
 
         if (level === 0) {
-            return result = (levelMin * 100) / maxLevel;
+            return result = 20 + (levelMin * 70) / maxLevel;
         }
         
-        return result;
+        return 30 + result;
     }
 
     const getDarkerColor = (hexColor, level, maxLevel) => {
@@ -99,8 +99,6 @@ export default function SkillsList() {
                                     </View>
                                 </View>
                             </View>
-
-
                         </View>
                     </View>
                 )}

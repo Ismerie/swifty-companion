@@ -12,11 +12,12 @@ import {
     ActivityIndicator,
 } from 'react-native';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
+import Icon from 'react-native-vector-icons/Ionicons';
 import SearchBar from './Home/SearchBar'
 import { screenHeight, screenWidth } from './Utils/constant';
 import { signInWith42 } from './Utils/getAccessToken';
 import { useStudent } from './Utils/studentContext';
-import { getStoredToken } from './Utils/getAccessToken';
+import { getStoredToken, logout } from './Utils/getAccessToken';
 
 
 export default function HomeScreen() {
@@ -26,9 +27,12 @@ export default function HomeScreen() {
     const { token, setToken } = useStudent();
     const [loading, setLoading] = useState(true);
 
-
     const handleSignIn = () => {
         signInWith42(setToken);
+    }
+
+    const handleLogout = () => {
+        logout(setToken);
     }
 
     function handleFocus() {
@@ -48,32 +52,31 @@ export default function HomeScreen() {
     }
     
     function handleBlur() {
-            setInputIsFocused(false);
-            Animated.parallel([
-                Animated.timing(logoOpacity, {
-                    toValue: 1,
-                    duration: 200,
-                    useNativeDriver: true,
-                }),
-                Animated.timing(translateY, {
-                    toValue: 0,
-                    duration: 300,
-                    useNativeDriver: true,
-                }),
-            ]).start();
-            Keyboard.dismiss();
+        setInputIsFocused(false);
+        Animated.parallel([
+            Animated.timing(logoOpacity, {
+                toValue: 1,
+                duration: 200,
+                useNativeDriver: true,
+            }),
+            Animated.timing(translateY, {
+                toValue: 0,
+                duration: 300,
+                useNativeDriver: true,
+            }),
+        ]).start();
+        Keyboard.dismiss();
     }
 
     useEffect(() => {
-            const fetchToken = async () => {
-                const storedToken = await getStoredToken();
-                setToken(storedToken ? true : false);
-                setLoading(false)
-            };
-        
-            fetchToken();
-        }, []);
-        
+        const fetchToken = async () => {
+            const storedToken = await getStoredToken();
+            setToken(storedToken ? true : false);
+            setLoading(false);
+        };
+        fetchToken();
+    }, []);
+
     return (
         <AlertNotificationRoot>        
             <ImageBackground
@@ -83,41 +86,42 @@ export default function HomeScreen() {
             >
                 <TouchableWithoutFeedback onPress={handleBlur} accessible={false}>
                     <SafeAreaView style={styles.container}>
-                    {loading ? (
-                        <View style={styles.loadingContainer}>
-                            <ActivityIndicator size="large" color="#333533" />
-                        </View>
-                    ):(
-                        <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }]}]}>
-                            <Animated.Image 
-                                source={require('../assets/42logo.png')}
-                                style={[styles.logo, { opacity: logoOpacity, display: inputIsFocused ? 'none' : 'flex' }]}
-                            />
-                            <View style={{
-                                alignItems: 'center',
-                                justifyContent: 'end',
-                                width: '100%',
-                            }}>
-                            {token ? (
-                                <SearchBar handleBlur={handleBlur} handleFocus={handleFocus} inputIsFocused={inputIsFocused}/>
-                            ):(
-                                <TouchableOpacity 
-                                    style={styles.btnSignIn}
-                                    onPress={() => handleSignIn()}
-                                >
-                                    <Text style={styles.btnSignInText}>Sign In</Text>
-                                </TouchableOpacity>
-                            )}
+                        {loading ? (
+                            <View style={styles.loadingContainer}>
+                                <ActivityIndicator size="large" color="#333533" />
                             </View>
-                        </Animated.View>
-                    )}
+                        ) : (
+                            <>
+                                {token && (
+                                    <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+                                        <Icon name="log-out-outline" size={24} color="#fff" />
+                                    </TouchableOpacity>
+                                )}
+
+                                <Animated.View style={[styles.animatedContainer, { transform: [{ translateY }] }]}>
+                                    <Animated.Image 
+                                        source={require('../assets/42logo.png')}
+                                        style={[styles.logo, { opacity: logoOpacity, display: inputIsFocused ? 'none' : 'flex' }]}
+                                    />
+                                    <View style={styles.contentContainer}>
+                                        {token ? (
+                                            <SearchBar handleBlur={handleBlur} handleFocus={handleFocus} inputIsFocused={inputIsFocused} />
+                                        ) : (
+                                            <TouchableOpacity style={styles.btnSignIn} onPress={handleSignIn}>
+                                                <Text style={styles.btnSignInText}>Sign In</Text>
+                                            </TouchableOpacity>
+                                        )}
+                                    </View>
+                                </Animated.View>
+                            </>
+                        )}
                     </SafeAreaView>
                 </TouchableWithoutFeedback>
             </ImageBackground>
         </AlertNotificationRoot>
     );
-    }
-    
+}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -149,5 +153,19 @@ const styles = StyleSheet.create({
     btnSignInText: {
         fontSize: 20,
         textAlign: 'center',
+    },
+    contentContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%',
+    },
+    logoutButton: {
+        position: 'absolute',
+        top: 50,
+        right: 20,
+        backgroundColor: 'rgba(0,0,0,0.2)',
+        padding: 10,
+        borderRadius: 10,
+        zIndex: 10, 
     }
 });
