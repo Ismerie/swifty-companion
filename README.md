@@ -10,7 +10,7 @@ L'application doit :
 * utilisation du **protocole Oauth2** pour obtenir le token
 
 ### ✨ Bonus
-* le **token doit être recrée à son expiration**
+* le **token doit être refresh à son expiration**
 
 ## ⌨️ Les Technos
 
