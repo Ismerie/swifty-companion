@@ -20,7 +20,7 @@ L'application doit :
 
 ### Welcome
 <div style="display: flex; justify-content: center; gap: 10px;">
-  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/signin.jpg" alt="Preview acceuil" width="300"/>
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/singin.jpg" alt="Preview acceuil" width="300"/>
   <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/welcome.jpg" alt="Preview acceuil" width="300"/>
   <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/listSearch.jpg" alt="Preview recherche" width="300"/>
 </div>  
