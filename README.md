@@ -7,6 +7,7 @@ L'application doit :
 * afficher **les informations** des étudiants
 * afficher **les projets** réussis et ratés
 * afficher **les compétences** et leur pourcentages
+* utilisation du **protocole Oauth2** pour obtenir le token
 
 ### ✨ Bonus
 * le **token doit être recrée à son expiration**
@@ -19,6 +20,7 @@ L'application doit :
 
 ### Welcome
 <div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/signin.jpg" alt="Preview acceuil" width="300"/>
   <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/welcome.jpg" alt="Preview acceuil" width="300"/>
   <img src="https://github.com/Ismerie/swifty-companion/blob/main/preview/listSearch.jpg" alt="Preview recherche" width="300"/>
 </div>  
