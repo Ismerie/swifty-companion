@@ -6,7 +6,7 @@ L'application doit :
 * avoir au moins **2 vues**
 * afficher **les informations** des étudiants
 * afficher **les projets** réussis et ratés
-* afficher **les compétences** et leur pourcentages
+* afficher **les compétences** et leur pourcentage
 * utilisation du **protocole Oauth2** pour obtenir le token
 
 ### ✨ Bonus
